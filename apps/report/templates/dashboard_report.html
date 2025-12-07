@@ -83,91 +83,6 @@
       align-items: center;
     }
 
-    .test-button {
-      width: 100%;
-      height: 100%;
-      background-color: #e0e0e0;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2),
-      0 4px 5px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-      outline: none;
-      transform-style: preserve-3d;
-    }
-
-    .button-text {
-      color: #333;
-      font-size: 1.5em;
-      font-weight: bold;
-      z-index: 2;
-      transition: color 0.2s ease-out;
-    }
-
-    .button-lines {
-      position: absolute;
-      width: 80%;
-      height: 80%;
-      top: 10%;
-      left: 10%;
-      z-index: 1;
-    }
-
-    .button-lines .inner-circle {
-      stroke: #aaa;
-      transition: stroke 0.2s ease-out;
-    }
-
-
-    .test-button.active {
-      transform: translateY(4px) scale(0.98);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2),
-      0 1px 2px rgba(0, 0, 0, 0.1);
-    }
-
-    .test-button.active .button-text {
-      color: #ef6808;
-    }
-
-    .test-button.active .button-lines .inner-circle {
-      stroke: #ef6808;
-    }
-
-    .rotating-circle {
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      opacity: 0;
-      transition: opacity 0.3s ease-out;
-      pointer-events: none;
-    }
-
-    .test-button.active + .rotating-circle {
-      opacity: 1;
-      animation: rotateCircle 1.5s linear infinite;
-    }
-
-    .card-mz {
-      border-bottom: 7.5px solid #ef7512 !important;
-      padding: 20px 0px 30px;
-    }
-
-    @keyframes rotateCircle {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
   </style>
   <style>
     html, body {
@@ -257,26 +172,6 @@
 {% block page_js %}
   {{ block.super }}
   <script src="{% static 'js/report-dashboard.js' %}"></script>
-
-
-
-  <script>
-    const testButton = document.getElementById('testButton');
-    let isRotationActive = false; // وضعیت چرخش
-
-    testButton.addEventListener('click', function() {
-      isRotationActive = !isRotationActive; // تغییر وضعیت چرخش
-
-      if (isRotationActive) {
-        this.classList.add('active'); // اضافه کردن کلاس active برای فعال شدن چرخش و ظاهر فشرده
-      } else {
-        this.classList.remove('active'); // حذف کلاس active برای توقف چرخش و بازگشت به حالت عادی
-      }
-      window.location.href = '/speed_test/';
-    });
-  </script>
-
-
 
 {% endblock page_js %}
 
@@ -639,36 +534,7 @@
 
     <div class="col-xl-5 col-lg-12 mb-4">
       <div class="card card-mz w-100 mb-3">
-        <div class="row align-items-center">
 
-          <!-- سمت راست -->
-          <div class="col-md-6 d-flex justify-content-center">
-            <img class="img-fluid w-75 "
-                 src="{% static 'img/MyFile/speedTest.png' %}"
-                 height="100" width="100" alt="User avatar" />
-          </div>
-          <!-- سمت چپ -->
-          <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-            <div class="card-header-mz d-flex justify-content-center">
-              <h5>برای شروع تست روی دکمه فشار دهید</h5>
-            </div>
-            <div class="p-3 d-flex justify-content-center">
-              <div class="button-container position-relative">
-                <button class="test-button" id="testButton">
-                  <span class="button-text">شروع تست</span>
-                  <svg class="button-lines" viewBox="0 0 100 100">
-                    <circle class="inner-circle" cx="50" cy="50" r="54" fill="none" stroke-width="2" />
-                  </svg>
-                </button>
-                <svg class="rotating-circle position-absolute top-0 start-0" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="48" fill="none" stroke="#ef6808" stroke-width="3"
-                          stroke-dasharray="75 225" stroke-linecap="round" />
-                </svg>
-              </div>
-            </div>
-          </div>
-
-        </div>
       </div>
     </div>
   </div>
