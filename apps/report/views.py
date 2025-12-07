@@ -149,12 +149,12 @@ class IspView(TemplateView):
 
         speed_test = Test.objects.filter(isp_id=self.kwargs['pk'])
 
-        success_speed_test_list = speed_test.filter(status="Without Filter")
+        success_speed_test_list = speed_test.filter(status="Filter")
         success_speed_test = success_speed_test_list.count()
         fail_speed_test = speed_test.count() - success_speed_test
 
-        # success_speed_test_percent = round((success_speed_test * 100) / speed_test.count(), 2)
-        # fail_speed_test_percent = round((100 - success_speed_test_percent), 2)
+        success_speed_test_percent = round((success_speed_test * 100) / speed_test.count(), 2)
+        fail_speed_test_percent = round((100 - success_speed_test_percent), 2)
 
 
 
@@ -169,8 +169,8 @@ class IspView(TemplateView):
         context['test_count'] = speed_test.count()
         context['success_speed_test'] = success_speed_test
         context['fail_speed_test'] = fail_speed_test
-        context['success_speed_test_percent'] = 0
-        context['fail_speed_test_percent'] = 0
+        context['success_speed_test_percent'] = success_speed_test_percent
+        context['fail_speed_test_percent'] = fail_speed_test_percent
 
 
         context['max_download_speed'] = 0

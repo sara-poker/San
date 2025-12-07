@@ -150,31 +150,31 @@
     }
 
     #user_number {
-      border-right: 4px solid #df552b;
-      border-left: 4px solid #df552b;
+      border-right: 4px solid #2bafdf;
+      border-left: 4px solid #2bafdf;
     }
 
     #user_number h1 {
-      color: #df552b;
+      color: #2bafdf;
     }
 
 
     #ip_number {
-      border-right: 4px solid #ecb11b;
-      border-left: 4px solid #ecb11b;
+      border-right: 4px solid #1b56ec;
+      border-left: 4px solid #1b56ec;
     }
 
     #ip_number h1 {
-      color: #ecb11b;
+      color: #1b56ec;
     }
 
     #test_number {
-      border-right: 4px solid #ec6b1b;
-      border-left: 4px solid #ec6b1b;
+      border-right: 4px solid #001957;
+      border-left: 4px solid #001957;
     }
 
     #test_number h1 {
-      color: #ec6b1b;
+      color: #001957;
     }
 
     tbody .control {
@@ -527,7 +527,9 @@
                               data-bs-target="#profile"
                               type="button" role="tab"
                               aria-controls="profile"
-                              aria-selected="false">
+                              aria-selected="false"
+                              disabled
+                      >
                         <i class="tf-icons ti ti-wifi ti-xs me-1"></i>
                         آمار سرعت اپراتور
                       </button>
@@ -555,7 +557,7 @@
               <span class="badge bg-label-danger p-1 rounded">
                 <i class="ti ti-hand-stop ti-xs"></i>
               </span>
-                                      <p class="mb-0">تست ناموفق</p>
+                                      <p class="mb-0">بدون فیلتر</p>
                                     </div>
                                     <h5 class="mb-0 pt-1 text-nowrap">{{ fail_speed_test_percent }} %</h5>
                                     <small class="text-muted">{{ fail_speed_test }}</small>
@@ -571,7 +573,7 @@
 
                                   <div class="col-4 text-end">
                                     <div class="d-flex gap-2 justify-content-end align-items-center mb-2">
-                                      <p class="mb-0">تست موفق</p>
+                                      <p class="mb-0">فیلتر</p>
                                       <span class="badge bg-label-success p-1 rounded">
                 <i class="ti ti-check ti-xs"></i>
               </span>
