@@ -94,7 +94,7 @@ class TestTableView(TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
-        tests = Test.objects.all().order_by('-id')
+        tests = Test.objects.all().order_by('-date')
 
         context['tests'] = tests
         return context
