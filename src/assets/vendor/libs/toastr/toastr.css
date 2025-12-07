@@ -232,10 +232,10 @@ button.toast-close-button {
   margin-right: 0.75rem !important;
 }
 .toast-message a {
-  color: #ef7918;
+  color: #09dff3;
 }
 .toast-message a:hover {
-  color: rgba(239, 121, 24, 0.6);
+  color: rgba(9, 223, 243, 0.6);
 }
 
 .toast-title {
@@ -358,10 +358,10 @@ button.toast-close-button {
 }
 .dark-style #toast-container .toast-close-button {
   font-weight: 300;
-  color: #bb9079 !important;
+  color: #79b9bb !important;
 }
 .dark-style #toast-container .toast-title {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style #toast-container > div {
   box-shadow: 0 0.25rem 1rem rgba(15, 20, 34, 0.55);
@@ -374,7 +374,7 @@ button.toast-close-button {
 .dark-style #toast-container .toast-error,
 .dark-style #toast-container .toast-info,
 .dark-style #toast-container .toast-warning {
-  color: #ecd9cf;
+  color: #cfebec;
   background-color: #2f3349;
 }
 

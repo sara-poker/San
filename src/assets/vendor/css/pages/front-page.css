@@ -159,7 +159,7 @@ nav.layout-navbar.navbar-active::after {
 .light-style .layout-navbar .navbar.landing-navbar .navbar-nav .active > .nav-link,
 .light-style .layout-navbar .navbar.landing-navbar .navbar-nav .nav-link.show,
 .light-style .layout-navbar .navbar.landing-navbar .navbar-nav .nav-link.active {
-  color: #ef7918 !important;
+  color: #09dff3 !important;
 }
 @media (max-width: 991.98px) {
   .light-style .layout-navbar .navbar.landing-navbar .landing-nav-menu {
@@ -179,7 +179,7 @@ nav.layout-navbar.navbar-active::after {
   background-color: rgba(255, 255, 255, 0.04);
 }
 .dark-style .layout-navbar .navbar.landing-navbar .navbar-nav .nav-link {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .layout-navbar .navbar.landing-navbar .navbar-nav .show > .nav-link,
 .dark-style .layout-navbar .navbar.landing-navbar .navbar-nav .active > .nav-link,
@@ -193,7 +193,7 @@ nav.layout-navbar.navbar-active::after {
   }
 }
 .dark-style .layout-navbar .navbar .menu-text {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .layout-navbar.navbar-active .navbar.landing-navbar {
   background: #2f3349;
@@ -265,10 +265,10 @@ nav.layout-navbar.navbar-active::after {
 
 .dark-style .landing-footer .footer-link,
 .dark-style .landing-footer .footer-text {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .landing-footer .footer-title {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .landing-footer .footer-top {
   background-image: url("../../../img/front-pages/backgrounds/footer-bg-dark.png");

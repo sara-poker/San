@@ -335,8 +335,8 @@ html:not([dir=rtl]) .daterangepicker .drp-calendar.right {
   border-radius: var(--bs-border-radius);
 }
 .light-style .daterangepicker .ranges li:hover {
-  background-color: rgba(239, 121, 24, 0.08);
-  color: #ef7918;
+  background-color: rgba(9, 223, 243, 0.08);
+  color: #09dff3;
 }
 .light-style .daterangepicker .calendar-table .next,
 .light-style .daterangepicker .calendar-table .prev {
@@ -414,7 +414,7 @@ html:not([dir=rtl]) .daterangepicker .drp-calendar.right {
   z-index: 1091 !important;
 }
 .dark-style .daterangepicker table thead {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .daterangepicker.with-week-numbers {
   width: calc(16.4rem + 0px * 2);
@@ -442,18 +442,18 @@ html:not([dir=rtl]) .daterangepicker .drp-calendar.right {
 }
 .dark-style .daterangepicker td.week,
 .dark-style .daterangepicker th.week {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .daterangepicker td.disabled,
 .dark-style .daterangepicker option.disabled {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style .daterangepicker td.available:not(.active):hover,
 .dark-style .daterangepicker th.available:hover {
-  background-color: #3c3c4e;
+  background-color: #363f54;
 }
 .dark-style .daterangepicker td.off {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style .daterangepicker .ranges li {
   cursor: pointer;
@@ -465,33 +465,33 @@ html:not([dir=rtl]) .daterangepicker .drp-calendar.right {
 }
 .dark-style .daterangepicker .calendar-table .next,
 .dark-style .daterangepicker .calendar-table .prev {
-  background-color: #3c3c4e;
+  background-color: #363f54;
 }
 .dark-style .daterangepicker .calendar-table .next span,
 .dark-style .daterangepicker .calendar-table .prev span {
-  border-color: #e3c6b6;
+  border-color: #b6e2e3;
 }
 .dark-style .daterangepicker select {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .daterangepicker select.hourselect, .dark-style .daterangepicker select.minuteselect, .dark-style .daterangepicker select.secondselect, .dark-style .daterangepicker select.ampmselect {
-  background: rgba(208, 160, 134, 0.12);
+  background: rgba(134, 206, 208, 0.12);
   border: 1px solid transparent;
   font-size: 0.75rem;
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .daterangepicker select.hourselect option, .dark-style .daterangepicker select.minuteselect option, .dark-style .daterangepicker select.secondselect option, .dark-style .daterangepicker select.ampmselect option {
   background: #2f3349;
 }
 .dark-style .daterangepicker select.monthselect option, .dark-style .daterangepicker select.yearselect option {
-  color: #e3c6b6;
+  color: #b6e2e3;
   background: #2f3349;
 }
 .dark-style .daterangepicker select.monthselect option:disabled, .dark-style .daterangepicker select.yearselect option:disabled {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style .daterangepicker .calendar-time select.disabled {
-  color: #d0a086;
+  color: #86ced0;
 }
 @media (min-width: 768px) {
   .dark-style .daterangepicker {

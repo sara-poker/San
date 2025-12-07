@@ -637,7 +637,7 @@
 .dark-style .tags-inline .tagify__dropdown__item {
   border: 1px solid #434968;
   background: #25293c;
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .tags-inline .tagify__dropdown__item--active {
   color: #fff !important;
@@ -789,22 +789,22 @@
   box-shadow: 0 0 0 1.1em rgba(168, 170, 174, 0.16) inset;
 }
 .dark-style .tagify__tag > div .tagify__tag-text {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .tagify__tag > div .tagify__tag-text {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .tagify__tag:hover:not([readonly]) div::before, .dark-style .tagify__tag:focus div::before {
   box-shadow: 0 0 0 1.1em #25293c inset;
 }
 .dark-style .tagify__tag__removeBtn {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .tagify:hover:not([readonly]) {
   border-color: #434968;
 }
 .dark-style .tagify__input::before {
-  color: #92705e !important;
+  color: #5e9092 !important;
 }
 .dark-style .tagify[readonly]:not(.tagify--mix) .tagify__tag > div::before {
   background: linear-gradient(45deg, #434968 25%, transparent 25%, transparent 50%, #434968 50%, #434968 75%, transparent 75%, transparent) 0/5px 5px;

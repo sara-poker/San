@@ -203,11 +203,11 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   background-color: rgba(75, 70, 92, 0.16);
 }
 .light-style .fc-event-primary:not(.fc-list-event) {
-  background-color: #fdebdc !important;
-  color: #ef7918 !important;
+  background-color: #dafafd !important;
+  color: #09dff3 !important;
 }
 .light-style .fc-event-primary.fc-list-event .fc-list-event-dot {
-  border-color: #ef7918 !important;
+  border-color: #09dff3 !important;
 }
 .light-style .fc-event-secondary:not(.fc-list-event) {
   background-color: #eaebed !important;
@@ -268,7 +268,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
 
 .dark-style .fc .fc-toolbar .fc-prev-button .fc-icon,
 .dark-style .fc .fc-toolbar .fc-next-button .fc-icon {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .fc .fc-toolbar .fc-sidebarToggle-button {
   color: #fff;
@@ -290,7 +290,7 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   color: #ea5455;
 }
 .dark-style .fc .fc-day-today {
-  background-color: #3c3c4e !important;
+  background-color: #363f54 !important;
 }
 .dark-style .fc .fc-day-today .fc-popover-body {
   background-color: #2f3349 !important;
@@ -311,13 +311,13 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
 }
 .dark-style .fc .fc-list .fc-list-table th {
   border: 0;
-  background: #393a4d;
+  background: #343c51;
 }
 .dark-style .fc .fc-list .fc-list-table .fc-list-event {
   cursor: pointer;
 }
 .dark-style .fc .fc-list .fc-list-table .fc-list-event:hover td {
-  background-color: rgba(208, 160, 134, 0.08);
+  background-color: rgba(134, 206, 208, 0.08);
 }
 .dark-style .fc .fc-list .fc-list-table .fc-list-event td {
   border-color: #434968;
@@ -333,10 +333,10 @@ html:not([dir=rtl]) .fc .fc-view-harness .fc-scrollgrid-section-header > * {
   border-color: #434968;
 }
 .dark-style .fc .fc-timegrid-axis-cushion.fc-scrollgrid-shrink-cushion {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style .fc .fc-day-disabled {
-  background-color: rgba(208, 160, 134, 0.16);
+  background-color: rgba(134, 206, 208, 0.16);
 }
 .dark-style .fc-event-primary:not(.fc-list-event) {
   background-color: #4f3f43 !important;

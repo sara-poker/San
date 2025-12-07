@@ -670,28 +670,28 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 
 .dark-style .noUi-target {
-  background: rgba(208, 160, 134, 0.08);
+  background: rgba(134, 206, 208, 0.08);
 }
 .dark-style .noUi-connect {
-  background: #bb9079;
+  background: #79b9bb;
 }
 .dark-style .noUi-handle {
   border: 2px solid #2f3349;
   box-shadow: 0 0.125rem 0.25rem rgba(15, 20, 34, 0.4);
-  background: #72584a !important;
+  background: #4a7172 !important;
 }
 .dark-style .noUi-target[disabled] {
-  background: rgba(208, 160, 134, 0.24);
+  background: rgba(134, 206, 208, 0.24);
 }
 .dark-style .noUi-value {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style .noUi-marker {
   background: #434968;
 }
 .dark-style .noUi-tooltip {
-  color: #ecd9cf;
-  background: rgba(208, 160, 134, 0.16);
+  color: #cfebec;
+  background: rgba(134, 206, 208, 0.16);
   font-weight: 500;
 }
 .dark-style .noUi-secondary .noUi-connect {

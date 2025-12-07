@@ -1246,33 +1246,33 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
 .dark-style .swal2-popup .swal2-title {
   font-size: 2rem;
   font-weight: 500;
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .swal2-popup .swal2-content {
   font-weight: 300;
-  color: #bb9079;
+  color: #79b9bb;
   line-height: 1.47;
   font-size: 1.125rem;
 }
 .dark-style .swal2-popup .swal2-content pre {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .swal2-popup .swal2-footer {
   border-top: 1px solid #434968;
 }
 .dark-style .swal2-popup .swal2-html-container {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .swal2-popup .swal2-input,
 .dark-style .swal2-popup .swal2-file,
 .dark-style .swal2-popup .swal2-textarea {
-  color: #e3c6b6;
+  color: #b6e2e3;
   border: var(--bs-border-width) solid #434968 !important;
   font-size: 1rem;
   border-radius: 0.5rem;
 }
 .dark-style .swal2-popup .swal2-validationerror {
-  color: #e3c6b6;
+  color: #b6e2e3;
   background: rgba(255, 255, 255, 0.8);
 }
 .dark-style .swal2-popup .swal2-icon.swal2-success {

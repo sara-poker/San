@@ -385,28 +385,28 @@ html:not([dir=rtl]).light-style .bs-stepper.vertical .bs-stepper-header {
   border-bottom: 1px solid #434968;
 }
 .dark-style .bs-stepper .bs-stepper-header .line i {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style .bs-stepper .bs-stepper-header .bs-stepper-label,
 .dark-style .bs-stepper .bs-stepper-header .bs-stepper-title {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .bs-stepper .bs-stepper-header .bs-stepper-label .bs-stepper-subtitle {
-  color: #bb9079 !important;
+  color: #79b9bb !important;
 }
 .dark-style .bs-stepper .bs-stepper-header .step:not(.active) .bs-stepper-circle {
-  background-color: #3c3c4e;
-  color: #e3c6b6;
+  background-color: #363f54;
+  color: #b6e2e3;
 }
 .dark-style .bs-stepper .bs-stepper-header .step.active .bs-stepper-circle {
   box-shadow: 0 0.125rem 0.25rem rgba(15, 20, 34, 0.4);
 }
 .dark-style .bs-stepper .bs-stepper-header .step.crossed .bs-stepper-label,
 .dark-style .bs-stepper .bs-stepper-header .step.crossed .bs-stepper-title {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style .bs-stepper .step-trigger:focus {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .bs-stepper.vertical .bs-stepper-header {
   border-bottom: none;
@@ -426,13 +426,13 @@ html:not([dir=rtl]).light-style .bs-stepper.vertical .bs-stepper-header {
   box-shadow: 0 0.25rem 1.25rem rgba(15, 20, 34, 0.4);
 }
 .dark-style .bs-stepper.wizard-icons .bs-stepper-header .bs-stepper-icon i {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .bs-stepper.wizard-icons .bs-stepper-header .bs-stepper-icon svg {
-  fill: #e3c6b6;
+  fill: #b6e2e3;
 }
 .dark-style .bs-stepper.wizard-icons .bs-stepper-header .bs-stepper-label {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 
 [dir=rtl].dark-style .bs-stepper.vertical .bs-stepper-header {

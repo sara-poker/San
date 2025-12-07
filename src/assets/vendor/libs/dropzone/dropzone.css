@@ -286,14 +286,14 @@
   box-shadow: 0 0.25rem 1.25rem rgba(15, 20, 34, 0.4);
 }
 .dark-style .dz-message {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .dz-message:before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-upload' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='%23ecd9cf' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2' /%3E%3Cpolyline points='7 9 12 4 17 9' /%3E%3Cline x1='12' y1='4' x2='12' y2='16' /%3E%3C/svg%3E") !important;
-  background: rgba(208, 160, 134, 0.08);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='icon icon-tabler icon-tabler-upload' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='%23cfebec' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2' /%3E%3Cpolyline points='7 9 12 4 17 9' /%3E%3Cline x1='12' y1='4' x2='12' y2='16' /%3E%3C/svg%3E") !important;
+  background: rgba(134, 206, 208, 0.08);
 }
 .dark-style .dz-message .note {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .dz-filename {
   background: #2f3349;
@@ -302,7 +302,7 @@
   border-bottom: 0 solid #434968;
 }
 .dark-style .dz-size {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style .dz-thumbnail {
   border-bottom: 1px solid #434968;
@@ -311,16 +311,16 @@
   border-top-right-radius: calc(0.375rem - 1px);
 }
 .dark-style .dz-nopreview {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style .dz-remove {
-  color: #e3c6b6;
+  color: #b6e2e3;
   border-top: 1px solid #434968;
   border-bottom-right-radius: calc(0.375rem - 1px);
   border-bottom-left-radius: calc(0.375rem - 1px);
 }
 .dark-style .dz-remove:hover, .dark-style .dz-remove:focus {
-  color: #e3c6b6;
+  color: #b6e2e3;
   background: rgba(255, 255, 255, 0.8);
 }
 .dark-style .dz-error-mark,

@@ -73,7 +73,7 @@ table.dataTable.table-sm tbody td.select-checkbox::before {
 
 table.dataTable tbody > tr.selected td,
 table.dataTable tbody > tr > .selected td {
-  background-color: rgba(239, 121, 24, 0.08);
+  background-color: rgba(9, 223, 243, 0.08);
   box-shadow: none;
 }
 

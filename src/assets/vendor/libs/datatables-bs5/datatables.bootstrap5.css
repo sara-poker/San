@@ -757,7 +757,7 @@ html:not([dir=rtl]) div.card-datatable table.dataTable tbody td:first-child {
 }
 
 .dark-style div.dataTables_wrapper div.dataTables_info {
-  color: #bb9079;
+  color: #79b9bb;
 }
 .dark-style div.dataTables_scrollBody table {
   border-top-color: var(--bs-border-color);
@@ -768,5 +768,5 @@ html:not([dir=rtl]) div.card-datatable table.dataTable tbody td:first-child {
 }
 
 div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.disabled .page-link {
-  background-color: rgba(208, 160, 134, 0.08);
+  background-color: rgba(134, 206, 208, 0.08);
 }

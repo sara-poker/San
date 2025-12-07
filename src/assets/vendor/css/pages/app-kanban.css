@@ -140,14 +140,14 @@
 }
 
 .dark-style .app-kanban .kanban-board .kanban-board-header {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .app-kanban .kanban-board .kanban-item {
   background-color: #2f3349;
   box-shadow: 0 0.25rem 1.25rem rgba(15, 20, 34, 0.4);
 }
 .dark-style .app-kanban .kanban-add-new-board label {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .kanban-item.gu-mirror {
   background-color: #2f3349;

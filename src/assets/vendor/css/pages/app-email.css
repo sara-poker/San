@@ -50,7 +50,7 @@
   margin-bottom: 0;
 }
 .app-email .app-email-sidebar .email-filters .email-filter-folders li.active {
-  border-color: #ef7918;
+  border-color: #09dff3;
 }
 .app-email .app-email-sidebar .email-filters li {
   padding: 0.4375rem 1.5rem;
@@ -327,7 +327,7 @@
   background-color: #2f3349;
 }
 .dark-style .app-email .app-email-sidebar ul li:not(.active) a {
-  color: #e3c6b6;
+  color: #b6e2e3;
 }
 .dark-style .app-email .emails-list-header .email-search-input,
 .dark-style .app-email .emails-list-header .input-group-text {
@@ -337,7 +337,7 @@
   border-bottom: 1px solid #434968;
 }
 .dark-style .app-email .email-list li.email-list-item.email-marked-read {
-  background-color: rgba(208, 160, 134, 0.06);
+  background-color: rgba(134, 206, 208, 0.06);
 }
 .dark-style .app-email .email-list li.email-list-item:hover {
   box-shadow: 0 2px 5px 0 rgba(255, 255, 255, 0.15);

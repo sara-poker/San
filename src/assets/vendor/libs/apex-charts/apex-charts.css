@@ -765,7 +765,7 @@
   font-family: var(--bs-font-sans-serif) !important;
 }
 .dark-style .apexcharts-canvas .apexcharts-tooltip.apexcharts-theme-light {
-  color: #ecd9cf;
+  color: #cfebec;
 }
 .dark-style .apexcharts-canvas .apexcharts-tooltip.apexcharts-theme-dark {
   color: #fff;
@@ -776,7 +776,7 @@
 .dark-style .apexcharts-canvas .apexcharts-xaxistooltip,
 .dark-style .apexcharts-canvas .apexcharts-yaxistooltip {
   background: #25293c;
-  color: #ecd9cf;
+  color: #cfebec;
   border-color: #434968;
 }
 .dark-style .apexcharts-canvas .apexcharts-xaxistooltip.apexcharts-xaxistooltip-bottom:after, .dark-style .apexcharts-canvas .apexcharts-xaxistooltip.apexcharts-yaxistooltip-bottom:after,

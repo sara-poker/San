@@ -1153,7 +1153,7 @@ a.plyr__control::after, a.plyr__control::before {
   font-size: 0.75rem;
 }
 .dark-style .plyr--audio .plyr__controls {
-  color: #e3c6b6;
+  color: #b6e2e3;
   background-color: #2f3349;
 }
 .dark-style .plyr--full-ui.plyr--audio input[type=range]::-webkit-slider-runnable-track {
