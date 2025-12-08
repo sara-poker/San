@@ -36,9 +36,21 @@ urlpatterns = [
 
     ),
     path(
+        "report/app/<int:pk>/",
+        login_required(AppView.as_view(template_name="app.html")),
+        name="app",
+
+    ),
+    path(
         "api/get_all_isp/",
         GetAllIspAPIView.as_view(),
         name="get_all_isp",
+    ),
+
+    path(
+        "api/get_all_app/",
+        GetAllAppAPIView.as_view(),
+        name="get_all_app",
     )
 
 ]

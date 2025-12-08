@@ -7,8 +7,8 @@ from persiantools.jdatetime import JalaliDate
 
 from web_project import TemplateLayout
 
-from apps.test.models import Test, Isp
-from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA
+from apps.test.models import Test, Isp, App
+from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA, GetAllAppAPISerializer
 
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
@@ -134,7 +134,6 @@ class ProvinceView(TemplateView):
 
         data = []
 
-
         context["province"] = name
         return context
 
@@ -156,15 +155,11 @@ class IspView(TemplateView):
         success_speed_test_percent = round((success_speed_test * 100) / speed_test.count(), 2)
         fail_speed_test_percent = round((100 - success_speed_test_percent), 2)
 
-
-
         unique_users_ids = speed_test.values_list('user', flat=True).distinct()
         User = get_user_model()
         unique_users = User.objects.filter(id__in=unique_users_ids)
 
-
         context['isp'] = isp
-
 
         context['test_count'] = speed_test.count()
         context['success_speed_test'] = success_speed_test
@@ -172,21 +167,70 @@ class IspView(TemplateView):
         context['success_speed_test_percent'] = success_speed_test_percent
         context['fail_speed_test_percent'] = fail_speed_test_percent
 
-
         context['max_download_speed'] = 0
         context['min_download_speed'] = 0
         context['avg_download_speed'] = 0
-
 
         context['max_upload_speed'] = 0
         context['min_upload_speed'] = 0
         context['avg_upload_speed'] = 0
 
-
         context['max_ping_speed'] = 0
         context['min_ping_speed'] = 0
         context['avg_ping_speed'] = 0
 
+        context['max_jitter_speed'] = 0
+        context['min_jitter_speed'] = 0
+        context['avg_jitter_speed'] = 0
+
+        context['ips_count'] = 0
+        context['unique_ips'] = list([])
+
+        context['users_count'] = unique_users.count()
+        context['unique_users'] = list(unique_users)
+
+        return context
+
+class AppView(TemplateView):
+    template_name = "isp.html"
+
+    def get_context_data(self, **kwargs):
+        context = TemplateLayout.init(self, super().get_context_data(**kwargs))
+
+        isp = Isp.objects.filter(pk=self.kwargs['pk']).first()
+
+        speed_test = Test.objects.filter(isp_id=self.kwargs['pk'])
+
+        success_speed_test_list = speed_test.filter(status="Filter")
+        success_speed_test = success_speed_test_list.count()
+        fail_speed_test = speed_test.count() - success_speed_test
+
+        success_speed_test_percent = round((success_speed_test * 100) / speed_test.count(), 2)
+        fail_speed_test_percent = round((100 - success_speed_test_percent), 2)
+
+        unique_users_ids = speed_test.values_list('user', flat=True).distinct()
+        User = get_user_model()
+        unique_users = User.objects.filter(id__in=unique_users_ids)
+
+        context['isp'] = isp
+
+        context['test_count'] = speed_test.count()
+        context['success_speed_test'] = success_speed_test
+        context['fail_speed_test'] = fail_speed_test
+        context['success_speed_test_percent'] = success_speed_test_percent
+        context['fail_speed_test_percent'] = fail_speed_test_percent
+
+        context['max_download_speed'] = 0
+        context['min_download_speed'] = 0
+        context['avg_download_speed'] = 0
+
+        context['max_upload_speed'] = 0
+        context['min_upload_speed'] = 0
+        context['avg_upload_speed'] = 0
+
+        context['max_ping_speed'] = 0
+        context['min_ping_speed'] = 0
+        context['avg_ping_speed'] = 0
 
         context['max_jitter_speed'] = 0
         context['min_jitter_speed'] = 0
@@ -217,3 +261,11 @@ class GetAllIspAPIView(APIView):
         return Response(serializer.data)
 
 
+class GetAllAppAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        app = App.objects.filter().order_by('name')
+
+        serializer = GetAllAppAPISerializer(app, many=True)
+        return Response(serializer.data)

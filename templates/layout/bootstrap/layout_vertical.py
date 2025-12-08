@@ -40,11 +40,17 @@ menu_file = {
             ]
         },
         {
-            "name": "اپراتور ها",
-            "icon": "menu-icon tf-icons ti ti-building-broadcast-tower",
+            "name": "نرم افزار ها و اپراتور ها",
+            "icon": "menu-icon tf-icons ti ti-stack",
             "slug": "setting",
             "submenu": [
                 {
+                    "url": "app",
+                    "name": "لیست اپلیکیشن ها",
+                    "slug": "app",
+                    "pk": 1
+                },
+{
                     "url": "isp",
                     "name": "لیست اپراتور ها",
                     "slug": "isp",
