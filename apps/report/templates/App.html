@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}اپلیکیشن ها{% endblock %}
+{% block title %}اپلیکیشن ها | {{ app.name }}{% endblock %}
 
 {% block vendor_css %}
   {{ block.super }}
@@ -444,7 +444,7 @@
                 <div class="col-12">
                   <div class="card mb-4">
                     <div class="user-profile-header-banner">
-                      <img width="100%" src="{% static 'img/pages/profile-banner4.png' %}" alt="Banner image"
+                      <img width="100%" src="{% static 'img/pages/profile-banner2.png' %}" alt="Banner image"
                            class="rounded-top">
                     </div>
                     <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
@@ -534,7 +534,9 @@
                                     <div class="modal-body">
                                       {% for item in unique_isp %}
                                         <ul>
-                                          <li>{{ item }}</li>
+                                          <a href="/report/isp/{{ item.id }}">
+                                            <li>{{ item }}</li>
+                                          </a>
                                         </ul>
                                       {% endfor %}
 
@@ -695,7 +697,9 @@
                                   <div class="modal-body">
                                     <ul>
                                       {% for item in unique_isp %}
-                                        <li>{{ item }}</li>
+                                        <a href="/report/isp/{{ item.id }}">
+                                          <li>{{ item }}</li>
+                                        </a>
                                       {% endfor %}
                                     </ul>
                                   </div>
