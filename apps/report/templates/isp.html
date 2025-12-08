@@ -259,7 +259,7 @@
                 var asnumber = full['as_number'];
                 if (id) {
                   return (
-                    '<a href="'+ url2 + id + '/">' +
+                    '<a href="' + url2 + id + '/">' +
                     '<img src="' + assetsPath + 'img/ispLogo/RGB/' + asnumber + '.png' + '" ' +
                     'alt="Avatar" width="60" class="rounded-circle" ' +
                     'loading="lazy" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/MyFile/logo.jpg\';">' +
@@ -621,22 +621,24 @@
                                   </button>
                                 </div>
                                 <div class="mx-auto my-3">
-                                  <h1>{{ ips_count }}</h1>
+                                  <h1>{{ apps_count }}</h1>
                                 </div>
-                                <h5>آیپی های شناسایی شده</h5>
+                                <h5>اپلیکیشن های تست شده</h5>
                               </div>
                               <div aria-hidden="true" class="modal fade" id="modalCenter2" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="modalCenterTitle">آیپی های شناسایی شده</h5>
+                                      <h5 class="modal-title" id="modalCenterTitle">اپلیکیشن های تست شده</h5>
                                       <button aria-label="بستن" class="btn-close" data-bs-dismiss="modal"
                                               type="button"></button>
                                     </div>
                                     <div class="modal-body">
-                                      {% for item in unique_ips %}
+                                      {% for item in unique_apps %}
                                         <ul>
-                                          <li>{{ item }}</li>
+                                          <a href="/report/app/{{ item.id }}">
+                                            <li>{{ item }}</li>
+                                          </a>
                                         </ul>
                                       {% endfor %}
 
@@ -711,23 +713,25 @@
                                 </button>
                               </div>
                               <div class="mx-auto my-3">
-                                <h1>{{ ips_count }}</h1>
+                                <h1>{{ apps_count }}</h1>
                               </div>
-                              <h5>آیپی های استفاده شده</h5>
+                              <h5>اپلیکیشن های تست شده</h5>
                             </div>
                             <!-- Modal for IPs -->
                             <div aria-hidden="true" class="modal fade" id="modalIps" tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title">آیپی های شناسایی شده</h5>
+                                    <h5 class="modal-title">اپلیکیشن های تست شده</h5>
                                     <button aria-label="بستن" class="btn-close" data-bs-dismiss="modal"
                                             type="button"></button>
                                   </div>
                                   <div class="modal-body">
                                     <ul>
-                                      {% for item in unique_ips %}
-                                        <li>{{ item }}</li>
+                                      {% for item in unique_apps %}
+                                        <a href="/report/app/{{ item.id }}">
+                                          <li>{{ item }}</li>
+                                        </a>
                                       {% endfor %}
                                     </ul>
                                   </div>

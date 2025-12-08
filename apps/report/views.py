@@ -159,6 +159,9 @@ class IspView(TemplateView):
         User = get_user_model()
         unique_users = User.objects.filter(id__in=unique_users_ids)
 
+        unique_apps_ids = speed_test.values_list('app', flat=True).distinct()
+        unique_apps = App.objects.filter(id__in=unique_apps_ids)
+
         context['isp'] = isp
 
         context['test_count'] = speed_test.count()
@@ -167,24 +170,8 @@ class IspView(TemplateView):
         context['success_speed_test_percent'] = success_speed_test_percent
         context['fail_speed_test_percent'] = fail_speed_test_percent
 
-        context['max_download_speed'] = 0
-        context['min_download_speed'] = 0
-        context['avg_download_speed'] = 0
-
-        context['max_upload_speed'] = 0
-        context['min_upload_speed'] = 0
-        context['avg_upload_speed'] = 0
-
-        context['max_ping_speed'] = 0
-        context['min_ping_speed'] = 0
-        context['avg_ping_speed'] = 0
-
-        context['max_jitter_speed'] = 0
-        context['min_jitter_speed'] = 0
-        context['avg_jitter_speed'] = 0
-
-        context['ips_count'] = 0
-        context['unique_ips'] = list([])
+        context['apps_count'] = unique_apps.count
+        context['unique_apps'] = list(unique_apps)
 
         context['users_count'] = unique_users.count()
         context['unique_users'] = list(unique_users)
