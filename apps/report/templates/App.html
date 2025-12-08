@@ -149,40 +149,6 @@
       font-size: 15px !important;
     }
 
-    #user_number {
-      border-right: 4px solid #2bafdf;
-      border-left: 4px solid #2bafdf;
-    }
-
-    #user_number h1 {
-      color: #2bafdf;
-    }
-
-
-    #ip_number {
-      border-right: 4px solid #1b56ec;
-      border-left: 4px solid #1b56ec;
-    }
-
-    #ip_number h1 {
-      color: #1b56ec;
-    }
-
-    #test_number {
-      border-right: 4px solid #001957;
-      border-left: 4px solid #001957;
-    }
-
-    #test_number h1 {
-      color: #001957;
-    }
-
-    tbody .control {
-      font-size: 0px;
-    }
-
-    .card {
-    }
   </style>
 {% endblock page_css %}
 
@@ -229,14 +195,8 @@
       if (dt_basic_table.length) {
         console.log('>>hello');
         var reportType = '{{ report_type }}';
-        var url1 = '/api/get_all_isp/';
-        var url2 = '/report/isp/';
-        console.log('>>>', reportType);
-
-        if (reportType === 'server_test') {
-          url1 = '/api/get_all_isp_server_test/';
-          url2 = '/report/isp_server_test/';
-        }
+        var url1 = '/api/get_all_app/';
+        var url2 = '/report/app/';
 
         var dt_basic = dt_basic_table.DataTable({
           ajax: {
@@ -260,7 +220,7 @@
                 if (id) {
                   return (
                     '<a href="'+ url2 + id + '/">' +
-                    '<img src="' + assetsPath + 'img/ispLogo/RGB/' + asnumber + '.png' + '" ' +
+                    '<img src="' + assetsPath + 'img/appsLogo/' + name.toLowerCase() + '.png' + '" ' +
                     'alt="Avatar" width="60" class="rounded-circle" ' +
                     'loading="lazy" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/MyFile/logo.jpg\';">' +
                     '</a>'

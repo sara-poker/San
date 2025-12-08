@@ -1,7 +1,7 @@
 from django.views.generic import (TemplateView)
 from django.contrib.auth import get_user_model
 from django.db.models import Exists, OuterRef, Avg
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 from persiantools.jdatetime import JalaliDate
 
@@ -144,7 +144,7 @@ class IspView(TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
-        isp = Isp.objects.filter(pk=self.kwargs['pk']).first()
+        isp = get_object_or_404(Isp, pk=self.kwargs['pk'])
 
         speed_test = Test.objects.filter(isp_id=self.kwargs['pk'])
 
@@ -191,34 +191,22 @@ class IspView(TemplateView):
 
         return context
 
+
 class AppView(TemplateView):
-    template_name = "isp.html"
+    template_name = "app.html"
 
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
-        isp = Isp.objects.filter(pk=self.kwargs['pk']).first()
+        app = get_object_or_404(App, pk=self.kwargs['pk'])
 
-        speed_test = Test.objects.filter(isp_id=self.kwargs['pk'])
+        context['app'] = app
 
-        success_speed_test_list = speed_test.filter(status="Filter")
-        success_speed_test = success_speed_test_list.count()
-        fail_speed_test = speed_test.count() - success_speed_test
-
-        success_speed_test_percent = round((success_speed_test * 100) / speed_test.count(), 2)
-        fail_speed_test_percent = round((100 - success_speed_test_percent), 2)
-
-        unique_users_ids = speed_test.values_list('user', flat=True).distinct()
-        User = get_user_model()
-        unique_users = User.objects.filter(id__in=unique_users_ids)
-
-        context['isp'] = isp
-
-        context['test_count'] = speed_test.count()
-        context['success_speed_test'] = success_speed_test
-        context['fail_speed_test'] = fail_speed_test
-        context['success_speed_test_percent'] = success_speed_test_percent
-        context['fail_speed_test_percent'] = fail_speed_test_percent
+        context['test_count'] = 0
+        context['success_speed_test'] = 0
+        context['fail_speed_test'] = 0
+        context['success_speed_test_percent'] = 0
+        context['fail_speed_test_percent'] = 0
 
         context['max_download_speed'] = 0
         context['min_download_speed'] = 0
@@ -239,8 +227,8 @@ class AppView(TemplateView):
         context['ips_count'] = 0
         context['unique_ips'] = list([])
 
-        context['users_count'] = unique_users.count()
-        context['unique_users'] = list(unique_users)
+        context['users_count'] = 0
+        context['unique_users'] = list([])
 
         return context
 

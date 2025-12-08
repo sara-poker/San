@@ -12,7 +12,6 @@ from web_project.template_helpers.theme import TemplateHelper
 
 API_BASE = settings.BASE_URL
 
-
 menu_file = {
     "menu": [
         {
@@ -50,7 +49,7 @@ menu_file = {
                     "slug": "app",
                     "pk": 1
                 },
-{
+                {
                     "url": "isp",
                     "name": "لیست اپراتور ها",
                     "slug": "isp",
