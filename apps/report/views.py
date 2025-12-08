@@ -199,36 +199,40 @@ class AppView(TemplateView):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
         app = get_object_or_404(App, pk=self.kwargs['pk'])
+        test = Test.objects.filter(app_id=self.kwargs['pk'])
+
+
+        filter_test_list = test.filter(status="Filter")
+        fliter_test_count = filter_test_list.count()
+        without_fliter_test_count = test.count() - fliter_test_count
+
+        filter_test_percent = round((fliter_test_count * 100) / test.count(), 2)
+        without_fliter_test_percent = round((100 - filter_test_percent), 2)
+
+
+        unique_users_ids = test.values_list('user', flat=True).distinct()
+        User = get_user_model()
+        unique_users = User.objects.filter(id__in=unique_users_ids)
+
+
+        unique_isp_ids = test.values_list('isp', flat=True).distinct()
+        unique_isps = Isp.objects.filter(id__in=unique_isp_ids)
+
 
         context['app'] = app
 
-        context['test_count'] = 0
-        context['success_speed_test'] = 0
-        context['fail_speed_test'] = 0
-        context['success_speed_test_percent'] = 0
-        context['fail_speed_test_percent'] = 0
+        context['test_count'] = test.count()
+        context['success_speed_test'] = fliter_test_count
+        context['fail_speed_test'] = without_fliter_test_count
+        context['success_speed_test_percent'] = filter_test_percent
+        context['fail_speed_test_percent'] = without_fliter_test_percent
 
-        context['max_download_speed'] = 0
-        context['min_download_speed'] = 0
-        context['avg_download_speed'] = 0
 
-        context['max_upload_speed'] = 0
-        context['min_upload_speed'] = 0
-        context['avg_upload_speed'] = 0
+        context['isp_count'] = unique_isps.count()
+        context['unique_isp'] = list(unique_isps)
 
-        context['max_ping_speed'] = 0
-        context['min_ping_speed'] = 0
-        context['avg_ping_speed'] = 0
-
-        context['max_jitter_speed'] = 0
-        context['min_jitter_speed'] = 0
-        context['avg_jitter_speed'] = 0
-
-        context['ips_count'] = 0
-        context['unique_ips'] = list([])
-
-        context['users_count'] = 0
-        context['unique_users'] = list([])
+        context['users_count'] = unique_users.count()
+        context['unique_users'] = list(unique_users)
 
         return context
 

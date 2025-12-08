@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}اپراتور ها{% endblock %}
+{% block title %}اپلیکیشن ها{% endblock %}
 
 {% block vendor_css %}
   {{ block.super }}
@@ -149,6 +149,40 @@
       font-size: 15px !important;
     }
 
+    #user_number {
+      border-top: 4px solid #2bafdf;
+      border-bottom: 4px solid #2bafdf;
+    }
+
+    #user_number h1 {
+      color: #2bafdf;
+    }
+
+
+    #ip_number {
+      border-top: 4px solid #1b56ec;
+      border-bottom: 4px solid #1b56ec;
+    }
+
+    #ip_number h1 {
+      color: #1b56ec;
+    }
+
+    #test_number {
+      border-top: 4px solid #001957;
+      border-bottom: 4px solid #001957;
+    }
+
+    #test_number h1 {
+      color: #001957;
+    }
+
+    tbody .control {
+      font-size: 0px;
+    }
+
+    .card {
+    }
   </style>
 {% endblock page_css %}
 
@@ -219,7 +253,7 @@
                 var asnumber = full['as_number'];
                 if (id) {
                   return (
-                    '<a href="'+ url2 + id + '/">' +
+                    '<a href="' + url2 + id + '/">' +
                     '<img src="' + assetsPath + 'img/appsLogo/' + name.toLowerCase() + '.png' + '" ' +
                     'alt="Avatar" width="60" class="rounded-circle" ' +
                     'loading="lazy" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/MyFile/logo.jpg\';">' +
@@ -394,7 +428,7 @@
                     <tr>
                       <th></th>
                       <th></th>
-                      <th>نام ارائه دهنده خدمات اینترنتی</th>
+                      <th>نام اپلیکیشن</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -415,8 +449,9 @@
                     </div>
                     <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                       <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-                        <img src="{% static 'img/ispLogo/RGB/' %}{{ isp.as_number }}.png"
-                             alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img"
+                        <img src="{% static 'img/appsLogo/' %}{{ app.name|lower|cut:" " }}.png"
+                             alt="{{ app.name }} Logo"
+                             class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img"
                              onerror="this.onerror=null; this.src='{% static 'img/MyFile/logo.jpg' %}';"
                         >
                       </div>
@@ -424,26 +459,22 @@
                         <div
                           class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                           <div class="user-profile-info">
-                            <h4>{{ isp.name }}</h4>
+                            <h4>{{ app.name }}</h4>
                             <ul
                               class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
                               <li class="list-inline-item d-flex gap-1">
-
-                                {% if isp.url %}
-                                  <i class='ti ti-unlink'></i> <a href="https://{{ isp.url }}/">{{ isp.url }}</a>
-                                {% else %}
-                                  <i class='ti ti-unlink'></i> دامنه نامشخص
-                                {% endif %}
+                                <i class='ti ti-building-factory-2'></i>{{ app.maker }}
                               </li>
+
                               <li class="list-inline-item d-flex gap-1">
-                                {% if isp.country != None %}
+                                {% if app.country != None %}
 
                                   <i class='ti ti-map-pin'></i>
 
-                                  {{ isp.country.persian_name }} |
-                                  <img alt="{{ test.network_info.country.name }}"
+                                  {{ app.country.persian_name }} |
+                                  <img alt="{{ app.country.name }}"
                                        src="
-                                         {% static 'img/flag/' %}{{ isp.country.name|lower|cut:' ' }}.png"
+                                         {% static 'img/flag/' %}{{ app.country.name|lower|cut:' ' }}.png"
                                        height="15">
 
                                 {% else %}
@@ -452,11 +483,13 @@
                               </li>
 
                               <li class="list-inline-item d-flex gap-1">
-                                <i class='ti ti-server'></i>{{ isp.as_number }}
-                              </li>
-
-                              <li class="list-inline-item d-flex gap-1">
-                                <i class='ti ti-network'></i>{{ isp.asname }}
+                                {% if app.normal_user_fee == "Free" %}
+                                  <i class='ti ti-free-rights'></i> رایگان
+                                {% elif app.normal_user_fee == "Limited Free" %}
+                                  <i class='ti ti-lock-minus'></i> رایگان محدود
+                                {% elif app.normal_user_fee == "Non-free" %}
+                                  <i class='ti ti-coin'></i> دارای هزینه
+                                {% endif %}
                               </li>
                             </ul>
                           </div>
@@ -469,34 +502,103 @@
               </div>
               <div class="col-xl-12">
                 <div class="nav-align-top mb-4">
-                  <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
-                    <li class="nav-item">
-                      <button class="nav-link active"
-                              data-bs-toggle="tab"
-                              data-bs-target="#home"
-                              type="button" role="tab"
-                              aria-controls="home"
-                              aria-selected="true">
-                        <i class="tf-icons ti ti-info-circle ti-xs me-1"></i>
-                        اطلاعات اپراتور
-                      </button>
-                    </li>
-                    <li class="nav-item">
-                      <button class="nav-link"
-                              data-bs-toggle="tab"
-                              data-bs-target="#profile"
-                              type="button" role="tab"
-                              aria-controls="profile"
-                              aria-selected="false"
-                              disabled>
-                        <i class="tf-icons ti ti-wifi ti-xs me-1"></i>
-                        آمار سرعت اپراتور
-                      </button>
-                    </li>
-                  </ul>
                   <div class="tab-content">
                     <div class="tab-pane fade show active" id="home" role="tabpanel">
                       <div class="row g-4">
+
+                        <div class="col-xl-5 col-lg-12 d-none d-xl-flex flex-column">
+                          <div class="flex-fill p-3 ">
+                            <div class="card number_dy" id="ip_number">
+                              <div class="card-body text-center">
+                                <div class="dropdown btn-pinned">
+                                  <button aria-expanded="false" class="btn dropdown-toggle hide-arrow p-0"
+                                          data-bs-target="#modalCenter2"
+                                          data-bs-toggle="modal" type="button">
+                                    <i class="ti ti-dots-vertical text-muted"></i>
+                                  </button>
+                                  </button>
+                                </div>
+                                <div class="mx-auto my-3">
+                                  <h1>{{ isp_count }}</h1>
+                                </div>
+                                <h5>اپراتور های تست کننده</h5>
+                              </div>
+                              <div aria-hidden="true" class="modal fade" id="modalCenter2" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="modalCenterTitle">اپراتور های شناسایی شده</h5>
+                                      <button aria-label="بستن" class="btn-close" data-bs-dismiss="modal"
+                                              type="button"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      {% for item in unique_isp %}
+                                        <ul>
+                                          <li>{{ item }}</li>
+                                        </ul>
+                                      {% endfor %}
+
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button class="btn btn-label-secondary" data-bs-dismiss="modal" type="button">
+                                        بستن
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="flex-fill p-3 ">
+                            <div class="card number_dy" id="user_number">
+                              <div class="card-body text-center">
+                                <div class="dropdown btn-pinned">
+                                  <button aria-expanded="false" class="btn dropdown-toggle hide-arrow p-0"
+                                          data-bs-target="#modalCenter1"
+                                          data-bs-toggle="modal" type="button">
+                                    <i class="ti ti-dots-vertical text-muted"></i>
+                                  </button>
+                                  </button>
+                                </div>
+                                <div class="mx-auto my-3">
+                                  <h1>{{ users_count }}</h1>
+                                </div>
+                                <h5>کاربران استفاده کننده</h5>
+                              </div>
+                              <div aria-hidden="true" class="modal fade" id="modalCenter1" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="modalCenterTitle">کاربران شناسایی شده</h5>
+                                      <button aria-label="بستن" class="btn-close" data-bs-dismiss="modal"
+                                              type="button"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      {% for item in unique_users %}
+                                        <ul>
+                                          <a href="/setup/user/detail/{{ item.id }}/">
+                                            <li>{{ item.name }} | {{ item.username }} </li>
+                                          </a>
+
+                                        </ul>
+                                      {% endfor %}
+
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button class="btn btn-label-secondary" data-bs-dismiss="modal" type="button">
+                                        بستن
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {# Start Desktop Size #}
+
+                        {# End Desktop Size #}
                         <div class="col-xl-7 col-lg-12 col-md-12">
                           <div class="card number_dy h-100 p-3" id="test_number">
                             <div class="card-body d-flex flex-column h-100 text-center">
@@ -565,100 +667,6 @@
                             </div>
                           </div>
                         </div>
-
-
-                        {# Start Desktop Size #}
-                        <div class="col-xl-5 col-lg-12 d-none d-xl-flex flex-column">
-                          <div class="flex-fill p-3 ">
-                            <div class="card number_dy" id="ip_number">
-                              <div class="card-body text-center">
-                                <div class="dropdown btn-pinned">
-                                  <button aria-expanded="false" class="btn dropdown-toggle hide-arrow p-0"
-                                          data-bs-target="#modalCenter2"
-                                          data-bs-toggle="modal" type="button">
-                                    <i class="ti ti-dots-vertical text-muted"></i>
-                                  </button>
-                                  </button>
-                                </div>
-                                <div class="mx-auto my-3">
-                                  <h1>{{ ips_count }}</h1>
-                                </div>
-                                <h5>آیپی های شناسایی شده</h5>
-                              </div>
-                              <div aria-hidden="true" class="modal fade" id="modalCenter2" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="modalCenterTitle">آیپی های شناسایی شده</h5>
-                                      <button aria-label="بستن" class="btn-close" data-bs-dismiss="modal"
-                                              type="button"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      {% for item in unique_ips %}
-                                        <ul>
-                                          <li>{{ item }}</li>
-                                        </ul>
-                                      {% endfor %}
-
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button class="btn btn-label-secondary" data-bs-dismiss="modal" type="button">
-                                        بستن
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="flex-fill p-3 ">
-                            <div class="card number_dy" id="user_number">
-                              <div class="card-body text-center">
-                                <div class="dropdown btn-pinned">
-                                  <button aria-expanded="false" class="btn dropdown-toggle hide-arrow p-0"
-                                          data-bs-target="#modalCenter1"
-                                          data-bs-toggle="modal" type="button">
-                                    <i class="ti ti-dots-vertical text-muted"></i>
-                                  </button>
-                                  </button>
-                                </div>
-                                <div class="mx-auto my-3">
-                                  <h1>{{ users_count }}</h1>
-                                </div>
-                                <h5>کاربران استفاده کننده</h5>
-                              </div>
-                              <div aria-hidden="true" class="modal fade" id="modalCenter1" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="modalCenterTitle">کاربران شناسایی شده</h5>
-                                      <button aria-label="بستن" class="btn-close" data-bs-dismiss="modal"
-                                              type="button"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      {% for item in unique_users %}
-                                        <ul>
-                                          <a href="/setup/user/detail/{{ item.id }}/">
-                                            <li>{{ item.name }} | {{ item.username }} </li>
-                                          </a>
-
-                                        </ul>
-                                      {% endfor %}
-
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button class="btn btn-label-secondary" data-bs-dismiss="modal" type="button">
-                                        بستن
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        {# End Desktop Size #}
-
                         {# Start mobile Size #}
                         <div class="col-6 d-xl-none">
                           <div class="card number_dy" id="ip_number">
@@ -671,22 +679,22 @@
                                 </button>
                               </div>
                               <div class="mx-auto my-3">
-                                <h1>{{ ips_count }}</h1>
+                                <h1>{{ isp_count }}</h1>
                               </div>
-                              <h5>آیپی های استفاده شده</h5>
+                              <h5>اپراتور های تست کننده</h5>
                             </div>
                             <!-- Modal for IPs -->
                             <div aria-hidden="true" class="modal fade" id="modalIps" tabindex="-1">
                               <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title">آیپی های شناسایی شده</h5>
+                                    <h5 class="modal-title">اپراتور های شناسایی شده</h5>
                                     <button aria-label="بستن" class="btn-close" data-bs-dismiss="modal"
                                             type="button"></button>
                                   </div>
                                   <div class="modal-body">
                                     <ul>
-                                      {% for item in unique_ips %}
+                                      {% for item in unique_isp %}
                                         <li>{{ item }}</li>
                                       {% endfor %}
                                     </ul>
@@ -747,233 +755,6 @@
                         </div>
                         {# End mobile Size #}
 
-                      </div>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel">
-                      <div class="accordion mt-3" id="accordionExample">
-                        <div class="card accordion-item active">
-                          <h2 class="accordion-header" id="headingOne">
-                            <button aria-controls="accordionOne" aria-expanded="true" class="accordion-button"
-                                    data-bs-target="#accordionOne" data-bs-toggle="collapse" type="button">
-                              <i class="ti ti-download ti-xs me-2"></i>
-                              دانلود | Download
-                            </button>
-                          </h2>
-                          <div class="accordion-collapse collapse show" data-bs-parent="#accordionExample"
-                               id="accordionOne">
-                            <div class="accordion-body">
-                              <div class="row text-center">
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-arrow-up text-success" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">بیشترین | Maximum</h5>
-                                      <h6 id="ping" class="text-success display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ max_download_speed }} Mb/s</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-arrow-down text-danger" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">کمترین | Minimum</h5>
-                                      <h6 id="ping" class="text-danger display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ min_download_speed }} Mb/s</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-chart-bar text-warning" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">میانگین | Average</h5>
-                                      <h6 id="ping" class="text-warning display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ avg_download_speed }} Mb/s</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card accordion-item">
-                          <h2 class="accordion-header" id="headingTwo">
-                            <button aria-controls="accordionTwo" aria-expanded="false"
-                                    class="accordion-button collapsed" data-bs-target="#accordionTwo"
-                                    data-bs-toggle="collapse" type="button">
-                              <i class="ti ti-upload ti-xs me-2"></i>
-                              آپلود | Upload
-                            </button>
-                          </h2>
-                          <div aria-labelledby="headingTwo" class="accordion-collapse collapse"
-                               data-bs-parent="#accordionExample" id="accordionTwo">
-                            <div class="accordion-body">
-                              <div class="row text-center">
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-arrow-up text-success" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">بیشترین | Maximum</h5>
-                                      <h6 id="ping" class="text-success display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ max_upload_speed }} Mb/s</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-arrow-down text-danger" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">کمترین | Minimum</h5>
-                                      <h6 id="ping" class="text-danger display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ min_upload_speed }} Mb/s</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-chart-bar text-warning" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">میانگین | Average</h5>
-                                      <h6 id="ping" class="text-warning display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ avg_upload_speed }} Mb/s</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card accordion-item">
-                          <h2 class="accordion-header" id="headingThree">
-                            <button aria-controls="accordionThree" aria-expanded="false"
-                                    class="accordion-button collapsed" data-bs-target="#accordionThree"
-                                    data-bs-toggle="collapse" type="button">
-                              <i class="ti ti-plug ti-xs me-2"></i>
-                              پینگ | Ping
-                            </button>
-                          </h2>
-                          <div aria-labelledby="headingThree" class="accordion-collapse collapse"
-                               data-bs-parent="#accordionExample" id="accordionThree">
-                            <div class="accordion-body">
-                              <div class="row text-center">
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-arrow-up text-success" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">بیشترین | Maximum</h5>
-                                      <h6 id="ping" class="text-success display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ max_ping_speed }} ms</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-arrow-down text-danger" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">کمترین | Minimum</h5>
-                                      <h6 id="ping" class="text-danger display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ min_ping_speed }} ms</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-chart-bar text-warning" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">میانگین | Average</h5>
-                                      <h6 id="ping" class="text-warning display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ avg_ping_speed }} ms</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card accordion-item">
-                          <h2 class="accordion-header" id="headingfoure">
-                            <button aria-controls="accordionThree" aria-expanded="false"
-                                    class="accordion-button collapsed" data-bs-target="#accordionfoure"
-                                    data-bs-toggle="collapse" type="button">
-                              <i class="ti ti-arrows-shuffle-2 ti-xs me-2"></i>
-                              جیتر | Jitter
-                            </button>
-                          </h2>
-                          <div aria-labelledby="headingThree" class="accordion-collapse collapse"
-                               data-bs-parent="#accordionExample" id="accordionfoure">
-                            <div class="accordion-body">
-                              <div class="row text-center">
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-arrow-up text-success" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">بیشترین | Maximum</h5>
-                                      <h6 id="ping" class="text-success display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ max_jitter_speed }}</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-arrow-down text-danger" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">کمترین | Minimum</h5>
-                                      <h6 id="ping" class="text-danger display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ min_jitter_speed }}</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-md-4 mb-3">
-                                  <div class="card text-center shadow-sm border-0 rounded-3 p-3">
-                                    <div class="card-body">
-                                      <div class="mb-2">
-                                        <i class="ti ti-chart-bar text-warning" style="font-size: 25px;"></i>
-                                      </div>
-                                      <h5 class="card-title mb-1 fw-bold">میانگین | Average</h5>
-                                      <h6 id="ping" class="text-warning display-6" dir="ltr"
-                                          style="font-size: 30px;">{{ avg_jitter_speed }}</h6>
-                                    </div>
-                                  </div>
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
