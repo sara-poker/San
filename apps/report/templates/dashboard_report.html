@@ -166,6 +166,13 @@
       border-radius: 10px;
     }
 
+    .mzloading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
   </style>
 {% endblock page_css %}
 
@@ -173,12 +180,117 @@
   {{ block.super }}
   <script src="{% static 'js/report-dashboard.js' %}"></script>
 
+  <script>
+    async function fetchData() {
+      try {
+        const response = await fetch(`${window.location.origin}/api/getAllRecord`);
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    async function populateTable() {
+      const data = await fetchData();
+      const tableBody = document.querySelector('table.datatables-direct-basic tbody');
+      tableBody.innerHTML = ''; // پاک کردن محتواهای قبلی
+
+      // برعکس کردن ترتیب داده‌ها
+      data.slice(0, 12).reverse().forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><img alt="User" class="rounded-circle" src="static/img/vpnIcon/${item.name2}.png" width="32" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/vpnIcon/default.png\';" ></td>
+          <td>${item.vpn_name.substring(0, 23)}</td>
+          <td>${translateOperator(item.oprator)}</td>
+          <td>${item.city}</td>
+          <td>${translateStatus(item.status)}</td>
+          <td>${item.date}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function translateOperator(operator) {
+      switch (operator) {
+        case 'Irancell':
+          return 'ایرانسل';
+        case 'MCI':
+          return 'همراه اول';
+        case 'TCI':
+          return 'مخابرات';
+        case 'RighTel':
+          return 'رایتل';
+        default:
+          return '';
+      }
+    }
+
+    function translateStatus(status) {
+      switch (status) {
+        case 'Filter':
+          return '<span class="badge bg-label-success">فیلتر</span>';
+        case 'Without Filter':
+          return '<span class="badge bg-label-danger">بدون فیلتر</span>';
+        default:
+          return '';
+      }
+    }
+
+    async function updateTablePeriodically() {
+      let data = await fetchData();
+      let index = 12; // شروع از رکورد سیزدهم
+
+      function updateTable() {
+        if (index >= data.length) index = 0; // اگر به انتهای داده‌ها رسیدیم، برگرد به اول
+
+        const tableBody = document.querySelector('table.datatables-direct-basic tbody');
+        const newRow = document.createElement('tr');
+        const item = data[index];
+
+        // نمایش لودینگ
+        $('.mzloading').show();
+
+        newRow.innerHTML = `
+          <td><img alt="User" class="rounded-circle" src="static/img/vpnIcon/${item.name2}.png" width="32" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/vpnIcon/default.png\';"></td>
+          <td>${item.vpn_name.substring(0, 23)}</td>
+          <td>${translateOperator(item.oprator)}</td>
+          <td>${item.city}</td>
+          <td>${translateStatus(item.status)}</td>
+          <td>${item.date}</td>
+        `;
+
+        tableBody.insertBefore(newRow, tableBody.firstChild); // رکورد جدید رو به اول اضافه کن
+        if (tableBody.rows.length > 12) {
+          tableBody.deleteRow(tableBody.rows.length - 1); // اگر بیش از ۱۲ رکورد شد، آخری رو حذف کن
+        }
+
+        // پنهان کردن لودینگ بعد از نیم ثانیه
+        setTimeout(function() {
+          $('.mzloading').hide();
+        }, 700);
+
+        index++; // برو به رکورد بعدی
+        const randomInterval = Math.floor(Math.random() * (12000 - 9000 + 1)) + 9000;
+        setTimeout(updateTable, randomInterval); // به‌روزرسانی بعدی با زمان تصادفی
+      }
+
+      updateTable(); // اولین بار اجرا
+    }
+
+    $(document).ready(function() {
+      $('.mzloading').hide(); // مخفی کردن لودینگ در ابتدا
+      populateTable(); // اولین بار جدول رو پر می‌کنیم
+      updateTablePeriodically();
+    });
+  </script>
+
 {% endblock page_js %}
 
 {% block content %}
   <div class="row">
     <!-- Website Analytics -->
-    <div class="col-xl-7 col-lg-12 col-md-12 mb-4">
+    <div class="col-xl-6 col-lg-12 col-md-12 mb-4">
       <div class="card h-100">
 
         <h5 class="card-header">آخرین وضعیت کشور</h5>
@@ -532,9 +644,32 @@
       </div>
     </div>
 
-    <div class="col-xl-5 col-lg-12 mb-4">
-      <div class="card card-mz w-100 mb-3">
 
+    <div class="col-xl-6 col-lg-12 mb-4">
+      <div class="card card-mz w-100 mb-3">
+        <h5 class="card-header"> آخرین تست های انجام شده</h5>
+        <div class="card-datatable table-responsive pt-0 w-100">
+          <table class="datatables-direct-basic table">
+            <div class="container-fluid h-100 mzloading">
+              <div class="sk-bounce sk-primary">
+                <div class="sk-bounce-dot"></div>
+                <div class="sk-bounce-dot"></div>
+              </div>
+            </div>
+            <thead>
+            <tr>
+              <th>آیکون</th>
+              <th>نام</th>
+              <th>اپراتور</th>
+              <th>استان</th>
+              <th>وضعیت</th>
+              <th>تاریخ</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
