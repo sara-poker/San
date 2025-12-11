@@ -1,14 +1,14 @@
 from django.views.generic import (TemplateView)
 from django.contrib.auth import get_user_model
 from django.db.models import Exists, OuterRef, Avg
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 from persiantools.jdatetime import JalaliDate
 
 from web_project import TemplateLayout
 
-from apps.test.models import Test, Isp
-from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA
+from apps.test.models import Test, Isp, App
+from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA, GetAllAppAPISerializer
 
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
@@ -94,7 +94,7 @@ class TestTableView(TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
-        tests = Test.objects.all().order_by('-id')
+        tests = Test.objects.all().order_by('-date')
 
         context['tests'] = tests
         return context
@@ -134,7 +134,6 @@ class ProvinceView(TemplateView):
 
         data = []
 
-
         context["province"] = name
         return context
 
@@ -145,55 +144,79 @@ class IspView(TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
-        isp = Isp.objects.filter(pk=self.kwargs['pk']).first()
+        isp = get_object_or_404(Isp, pk=self.kwargs['pk'])
 
         speed_test = Test.objects.filter(isp_id=self.kwargs['pk'])
 
-        success_speed_test_list = speed_test.filter(status="Without Filter")
+        success_speed_test_list = speed_test.filter(status="Filter")
         success_speed_test = success_speed_test_list.count()
         fail_speed_test = speed_test.count() - success_speed_test
 
-        # success_speed_test_percent = round((success_speed_test * 100) / speed_test.count(), 2)
-        # fail_speed_test_percent = round((100 - success_speed_test_percent), 2)
-
-
+        success_speed_test_percent = round((success_speed_test * 100) / speed_test.count(), 2)
+        fail_speed_test_percent = round((100 - success_speed_test_percent), 2)
 
         unique_users_ids = speed_test.values_list('user', flat=True).distinct()
         User = get_user_model()
         unique_users = User.objects.filter(id__in=unique_users_ids)
 
+        unique_apps_ids = speed_test.values_list('app', flat=True).distinct()
+        unique_apps = App.objects.filter(id__in=unique_apps_ids)
 
         context['isp'] = isp
-
 
         context['test_count'] = speed_test.count()
         context['success_speed_test'] = success_speed_test
         context['fail_speed_test'] = fail_speed_test
-        context['success_speed_test_percent'] = 0
-        context['fail_speed_test_percent'] = 0
+        context['success_speed_test_percent'] = success_speed_test_percent
+        context['fail_speed_test_percent'] = fail_speed_test_percent
+
+        context['apps_count'] = unique_apps.count
+        context['unique_apps'] = list(unique_apps)
+
+        context['users_count'] = unique_users.count()
+        context['unique_users'] = list(unique_users)
+
+        return context
 
 
-        context['max_download_speed'] = 0
-        context['min_download_speed'] = 0
-        context['avg_download_speed'] = 0
+class AppView(TemplateView):
+    template_name = "app.html"
+
+    def get_context_data(self, **kwargs):
+        context = TemplateLayout.init(self, super().get_context_data(**kwargs))
+
+        app = get_object_or_404(App, pk=self.kwargs['pk'])
+        test = Test.objects.filter(app_id=self.kwargs['pk'])
 
 
-        context['max_upload_speed'] = 0
-        context['min_upload_speed'] = 0
-        context['avg_upload_speed'] = 0
+        filter_test_list = test.filter(status="Filter")
+        fliter_test_count = filter_test_list.count()
+        without_fliter_test_count = test.count() - fliter_test_count
+
+        filter_test_percent = round((fliter_test_count * 100) / test.count(), 2)
+        without_fliter_test_percent = round((100 - filter_test_percent), 2)
 
 
-        context['max_ping_speed'] = 0
-        context['min_ping_speed'] = 0
-        context['avg_ping_speed'] = 0
+        unique_users_ids = test.values_list('user', flat=True).distinct()
+        User = get_user_model()
+        unique_users = User.objects.filter(id__in=unique_users_ids)
 
 
-        context['max_jitter_speed'] = 0
-        context['min_jitter_speed'] = 0
-        context['avg_jitter_speed'] = 0
+        unique_isp_ids = test.values_list('isp', flat=True).distinct()
+        unique_isps = Isp.objects.filter(id__in=unique_isp_ids)
 
-        context['ips_count'] = 0
-        context['unique_ips'] = list([])
+
+        context['app'] = app
+
+        context['test_count'] = test.count()
+        context['success_speed_test'] = fliter_test_count
+        context['fail_speed_test'] = without_fliter_test_count
+        context['success_speed_test_percent'] = filter_test_percent
+        context['fail_speed_test_percent'] = without_fliter_test_percent
+
+
+        context['isp_count'] = unique_isps.count()
+        context['unique_isp'] = list(unique_isps)
 
         context['users_count'] = unique_users.count()
         context['unique_users'] = list(unique_users)
@@ -217,3 +240,11 @@ class GetAllIspAPIView(APIView):
         return Response(serializer.data)
 
 
+class GetAllAppAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        app = App.objects.filter().order_by('name')
+
+        serializer = GetAllAppAPISerializer(app, many=True)
+        return Response(serializer.data)

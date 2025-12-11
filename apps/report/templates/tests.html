@@ -48,7 +48,7 @@
     }
 
     .clickable-row:hover {
-      background-color: #f6efeb;
+      background-color: #ebf5f6;
     }
   </style>
 {% endblock page_css %}
@@ -57,21 +57,21 @@
   {{ block.super }}
   <script src="{% static 'js/tables-datatables-basic.js' %}"></script>
   <script src="{% static 'js/form-layouts.js' %}"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const rows = document.querySelectorAll('.clickable-row');
-      rows.forEach(row => {
-        row.addEventListener('click', () => {
-          window.location.href = row.dataset.href;
-        });
-      });
-    });
-  </script>
+{#  <script>#}
+{#    document.addEventListener('DOMContentLoaded', function() {#}
+{#      const rows = document.querySelectorAll('.clickable-row');#}
+{#      rows.forEach(row => {#}
+{#        row.addEventListener('click', () => {#}
+{#          window.location.href = row.dataset.href;#}
+{#        });#}
+{#      });#}
+{#    });#}
+{#  </script>#}
 {% endblock page_js %}
 
 {% block content %}
   <h4 class="py-3 mb-4">
-    <span class="text-muted fw-light">  تست سرعت /</span> جدول تست ها
+    <span class="text-muted fw-light">  تست اتصال /</span> جدول تست ها
   </h4>
   <div class="card">
     <h5 class="card-header">لیست تست ها</h5>
@@ -80,12 +80,10 @@
         <thead>
         <tr>
           <th>تاریخ</th>
-          <th>سرور تست</th>
           <th>شهر</th>
           <th>اپراتور</th>
           <th>نتیجه</th>
-          <th>سرعت دانلود (مگابیت)</th>
-          <th>سرعت آپلود (مگابیت)</th>
+          <th>اپلیکیشن</th>
           <th>کاربر</th>
         </tr>
         </thead>
@@ -93,33 +91,24 @@
         {% for test in tests %}
           <tr class="clickable-row" data-href="{% url 'test_detail' test.id %}">
           <td>
-{#            {{ test.date }}#}
+            {#            {{ test.date }}#}
             {{ test.date|jformat:"%H:%M | %Y/%m/%d" }}
           </td>
           <td>
-            <img class="" alt="{{ test.server_test.country.name }}"
-                 src="{% static 'img/flag/' %}{{ test.server_test.country.name|lower|cut:' ' }}.png"
-                 width="22"> |
-            {{ test.server_test.name }}
+            {{ test.city }}
           </td>
           <td>
-            {{ test.network_info.city }}
+            {{ test.isp.name }}
           </td>
           <td>
-            {{ test.network_info.isp.name }}
-          </td>
-          <td>
-            {% if test.test_state %}
-              <span class="badge bg-label-success">موفق</span>
-            {% else %}
-              <span class="badge bg-label-danger">ناموفق</span>
+            {% if test.status == "Filter" %}
+              <span class="badge bg-label-success">فیلتر</span>
+            {% elif test.status == "Without Filter" %}
+              <span class="badge bg-label-danger">بدون فیلتر</span>
             {% endif %}
           </td>
           <td>
-            {{ test.speed_mbps }}
-          </td>
-          <td>
-            {{ test.upload_speed_mbps }}
+            {{ test.app.name }}
           </td>
           <td>
             <img class="rounded-circle" alt="{{ test.user.name }}"

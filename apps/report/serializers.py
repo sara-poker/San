@@ -1,7 +1,7 @@
 from rest_framework.serializers import BaseSerializer
 from rest_framework import serializers
 
-from apps.test.models import Isp
+from apps.test.models import Isp, App
 
 PROVINCES_FA = {
     "Alborz": "البرز",
@@ -42,3 +42,9 @@ class GetAllIspAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = Isp
         fields = ['id', 'name', 'url', 'org', 'as_number', 'asname']
+
+
+class GetAllAppAPISerializer(serializers.ModelSerializer):
+    class Meta:
+        model = App
+        fields = ['id', 'name']

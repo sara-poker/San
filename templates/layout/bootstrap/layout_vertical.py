@@ -12,7 +12,6 @@ from web_project.template_helpers.theme import TemplateHelper
 
 API_BASE = settings.BASE_URL
 
-
 menu_file = {
     "menu": [
         {
@@ -40,10 +39,16 @@ menu_file = {
             ]
         },
         {
-            "name": "اپراتور ها",
-            "icon": "menu-icon tf-icons ti ti-building-broadcast-tower",
+            "name": "نرم افزار ها و اپراتور ها",
+            "icon": "menu-icon tf-icons ti ti-stack",
             "slug": "setting",
             "submenu": [
+                {
+                    "url": "app",
+                    "name": "لیست اپلیکیشن ها",
+                    "slug": "app",
+                    "pk": 1
+                },
                 {
                     "url": "isp",
                     "name": "لیست اپراتور ها",
