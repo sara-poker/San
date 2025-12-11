@@ -196,111 +196,111 @@
 
 
   <!-- User Content -->
-  <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
-    <!-- User Pills -->
-    <ul class="nav nav-pills flex-column flex-md-row mb-4" id="infoTabs">
-      <li class="nav-item">
-        <a class="nav-link active" data-tab="system-info" href="javascript:void(0);">
-          <i class="ti ti-device-desktop ti-xs me-1"></i>اطلاعات سیستم
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-tab="network-info" href="javascript:void(0);">
-          <i class="ti ti-network ti-xs me-1"></i>اطلاعات شبکه
-        </a>
-      </li>
-    </ul>
-    <!--/ User Pills -->
-
-    <!-- Tab Content -->
-    <div id="tabContents">
-      <div id="system-info" class="tab-pane active">
-        <div class="card">
-          <h5 class="card-header">لیست دستگاه های مورد استفاده</h5>
-          <div class="card-datatable table-responsive pt-0">
-            <table class="datatables-direct-basic table">
-              <thead>
-              <tr>
-                <th>دستگاه</th>
-                <th>سیستم عامل</th>
-                <th>ورژن</th>
-                <th>پردازنده</th>
-                <th>مرورگر</th>
-                <th>نوع اتصال</th>
+{#  <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">#}
+{#    <!-- User Pills -->#}
+{#    <ul class="nav nav-pills flex-column flex-md-row mb-4" id="infoTabs">#}
+{#      <li class="nav-item">#}
+{#        <a class="nav-link active" data-tab="system-info" href="javascript:void(0);">#}
+{#          <i class="ti ti-device-desktop ti-xs me-1"></i>اطلاعات سیستم#}
+{#        </a>#}
+{#      </li>#}
+{#      <li class="nav-item">#}
+{#        <a class="nav-link" data-tab="network-info" href="javascript:void(0);">#}
+{#          <i class="ti ti-network ti-xs me-1"></i>اطلاعات شبکه#}
+{#        </a>#}
+{#      </li>#}
+{#    </ul>#}
+{#    <!--/ User Pills -->#}
+{##}
+{#    <!-- Tab Content -->#}
+{#    <div id="tabContents">#}
+{#      <div id="system-info" class="tab-pane active">#}
+{#        <div class="card">#}
+{#          <h5 class="card-header">لیست دستگاه های مورد استفاده</h5>#}
+{#          <div class="card-datatable table-responsive pt-0">#}
+{#            <table class="datatables-direct-basic table">#}
+{#              <thead>#}
+{#              <tr>#}
+{#                <th>دستگاه</th>#}
+{#                <th>سیستم عامل</th>#}
+{#                <th>ورژن</th>#}
+{#                <th>پردازنده</th>#}
+{#                <th>مرورگر</th>#}
+{#                <th>نوع اتصال</th>#}
                 {#                <th>عملیات</th>#}
-              </tr>
-              </thead>
-              <tbody>
-              {% for item in device_info_list %}
-                <tr>
+{#              </tr>#}
+{#              </thead>#}
+{#              <tbody>#}
+{#              {% for item in device_info_list %}#}
+{#                <tr>#}
                   {#                  <td>#}
                   {#                    <img alt="{{ server.country.name }}" src="{% static 'img/flag/' %}{{ server.country.name }}.png"#}
                   {#                         width="32">#}
                   {#                  </td>#}
-                  <td>{{ item.device }}</td>
-                  <td>
-                    {{ item.os }}
-                  </td>
-
-                  <td>
-                    {{ item.os_version }}
-                  </td>
-                  <td>
-                    {{ item.cpu }}
-                  </td>
-                  <td>
-                    {{ item.browser }}
-                  </td>
-                  <td>
-                    {{ item.network_kind }}
-                  </td>
-
-                </tr>
-              {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div id="network-info" class="tab-pane d-none">
-        <div class="card">
-          <h5 class="card-header">لیست شبکه ها</h5>
-          <div class="card-datatable table-responsive pt-0">
-            <table class="datatables-direct-basic table">
-              <thead>
-              <tr>
-                <th>کشور</th>
-                <th>شهر</th>
-                <th>اپراتور</th>
-                <th>آیپی</th>
-              </tr>
-              </thead>
-              <tbody>
-              {% for item in network_info_list %}
-                <tr>
-                  <td>
-                    <img alt="{{ item.country.name }}"
-                         src="{% static 'img/flag/' %}{{ item.country.name|lower|cut:' ' }}.png"
-                         width="32"> {{ item.country.persian_name }}</td>
-                  <td>
-                    {{ item.city }}
-                  </td>
-                  <td>
-                    {{ item.isp.name }}
-                  </td>
-                  <td>
-                    {{ item.ip }}
-                  </td>
-
-                </tr>
-              {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+{#                  <td>{{ item.device }}</td>#}
+{#                  <td>#}
+{#                    {{ item.os }}#}
+{#                  </td>#}
+{##}
+{#                  <td>#}
+{#                    {{ item.os_version }}#}
+{#                  </td>#}
+{#                  <td>#}
+{#                    {{ item.cpu }}#}
+{#                  </td>#}
+{#                  <td>#}
+{#                    {{ item.browser }}#}
+{#                  </td>#}
+{#                  <td>#}
+{#                    {{ item.network_kind }}#}
+{#                  </td>#}
+{##}
+{#                </tr>#}
+{#              {% endfor %}#}
+{#              </tbody>#}
+{#            </table>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#      <div id="network-info" class="tab-pane d-none">#}
+{#        <div class="card">#}
+{#          <h5 class="card-header">لیست شبکه ها</h5>#}
+{#          <div class="card-datatable table-responsive pt-0">#}
+{#            <table class="datatables-direct-basic table">#}
+{#              <thead>#}
+{#              <tr>#}
+{#                <th>کشور</th>#}
+{#                <th>شهر</th>#}
+{#                <th>اپراتور</th>#}
+{#                <th>آیپی</th>#}
+{#              </tr>#}
+{#              </thead>#}
+{#              <tbody>#}
+{#              {% for item in network_info_list %}#}
+{#                <tr>#}
+{#                  <td>#}
+{#                    <img alt="{{ item.country.name }}"#}
+{#                         src="{% static 'img/flag/' %}{{ item.country.name|lower|cut:' ' }}.png"#}
+{#                         width="32"> {{ item.country.persian_name }}</td>#}
+{#                  <td>#}
+{#                    {{ item.city }}#}
+{#                  </td>#}
+{#                  <td>#}
+{#                    {{ item.isp.name }}#}
+{#                  </td>#}
+{#                  <td>#}
+{#                    {{ item.ip }}#}
+{#                  </td>#}
+{##}
+{#                </tr>#}
+{#              {% endfor %}#}
+{#              </tbody>#}
+{#            </table>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
 
   <!-- Modal -->
   {% include "partials/_modals/modal_edit_user.html" %}
