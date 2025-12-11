@@ -57,16 +57,16 @@
   {{ block.super }}
   <script src="{% static 'js/tables-datatables-basic.js' %}"></script>
   <script src="{% static 'js/form-layouts.js' %}"></script>
-{#  <script>#}
-{#    document.addEventListener('DOMContentLoaded', function() {#}
-{#      const rows = document.querySelectorAll('.clickable-row');#}
-{#      rows.forEach(row => {#}
-{#        row.addEventListener('click', () => {#}
-{#          window.location.href = row.dataset.href;#}
-{#        });#}
-{#      });#}
-{#    });#}
-{#  </script>#}
+  {#  <script>#}
+  {#    document.addEventListener('DOMContentLoaded', function() {#}
+  {#      const rows = document.querySelectorAll('.clickable-row');#}
+  {#      rows.forEach(row => {#}
+  {#        row.addEventListener('click', () => {#}
+  {#          window.location.href = row.dataset.href;#}
+  {#        });#}
+  {#      });#}
+  {#    });#}
+  {#  </script>#}
 {% endblock page_js %}
 
 {% block content %}
@@ -98,7 +98,10 @@
             {{ test.city }}
           </td>
           <td>
-            {{ test.isp.name }}
+            {{ test.isp.name }} |
+            <img alt="{{ test.isp.name }}"
+                 src="{% static 'img/ispLogo/RGB/' %}{{ test.isp.as_number }}.png"
+                 height="25">
           </td>
           <td>
             {% if test.status == "Filter" %}
@@ -108,7 +111,10 @@
             {% endif %}
           </td>
           <td>
-            {{ test.app.name }}
+            {{ test.app.name }} |
+            <img alt="{{ test.app.name }}"
+                 src="{% static 'img/appsLogo/' %}{{ test.app.name|lower|cut:' ' }}.png"
+                 height="25">
           </td>
           <td>
             <img class="rounded-circle" alt="{{ test.user.name }}"

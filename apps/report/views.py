@@ -1,6 +1,6 @@
 from django.views.generic import (TemplateView)
 from django.contrib.auth import get_user_model
-from django.db.models import Exists, OuterRef, Avg
+from django.db.models import Exists, OuterRef, Avg, Count, Q
 from django.shortcuts import redirect, get_object_or_404
 
 from persiantools.jdatetime import JalaliDate
@@ -8,7 +8,7 @@ from persiantools.jdatetime import JalaliDate
 from web_project import TemplateLayout
 
 from apps.test.models import Test, Isp, App
-from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA, GetAllAppAPISerializer
+from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA, GetAllAppAPISerializer, EndTestSerializer
 
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
@@ -84,8 +84,51 @@ class ReportDashboardsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
+        base_qs = Test.objects.filter(status="Filter")
+
+        best_app_id = (
+            base_qs.values("app")
+            .annotate(c=Count("app"))
+            .order_by("-c")
+            .first()
+        )
+
+        best_app = App.objects.only("id", "name").get(pk=best_app_id["app"]) if best_app_id else None
+
+        bad_app_id = (
+            base_qs.values("app")
+            .annotate(c=Count("app"))
+            .order_by("c")
+            .first()
+        )
+
+        bad_app = App.objects.only("id", "name").get(pk=bad_app_id["app"]) if bad_app_id else None
+
+        best_isp_id = (
+            base_qs.values("isp")
+            .annotate(c=Count("isp"))
+            .order_by("-c")
+            .first()
+        )
+
+        best_isp = Isp.objects.only("id", "name", "as_number").get(pk=best_isp_id["isp"]) if best_isp_id else None
+
+        bad_isp_id = (
+            base_qs.values("isp")
+            .annotate(c=Count("isp"))
+            .order_by("c")
+            .first()
+        )
+
+        bad_isp = Isp.objects.only("id", "name", "as_number").get(pk=bad_isp_id["isp"]) if bad_isp_id else None
+
         province_data = {}
         context['province_data'] = province_data
+
+        context['best_app'] = best_app
+        context['bad_app'] = bad_app
+        context['best_isp'] = best_isp
+        context['bad_isp'] = bad_isp
 
         return context
 
@@ -188,7 +231,6 @@ class AppView(TemplateView):
         app = get_object_or_404(App, pk=self.kwargs['pk'])
         test = Test.objects.filter(app_id=self.kwargs['pk'])
 
-
         filter_test_list = test.filter(status="Filter")
         fliter_test_count = filter_test_list.count()
         without_fliter_test_count = test.count() - fliter_test_count
@@ -196,15 +238,12 @@ class AppView(TemplateView):
         filter_test_percent = round((fliter_test_count * 100) / test.count(), 2)
         without_fliter_test_percent = round((100 - filter_test_percent), 2)
 
-
         unique_users_ids = test.values_list('user', flat=True).distinct()
         User = get_user_model()
         unique_users = User.objects.filter(id__in=unique_users_ids)
 
-
         unique_isp_ids = test.values_list('isp', flat=True).distinct()
         unique_isps = Isp.objects.filter(id__in=unique_isp_ids)
-
 
         context['app'] = app
 
@@ -213,7 +252,6 @@ class AppView(TemplateView):
         context['fail_speed_test'] = without_fliter_test_count
         context['success_speed_test_percent'] = filter_test_percent
         context['fail_speed_test_percent'] = without_fliter_test_percent
-
 
         context['isp_count'] = unique_isps.count()
         context['unique_isp'] = list(unique_isps)
@@ -248,3 +286,13 @@ class GetAllAppAPIView(APIView):
 
         serializer = GetAllAppAPISerializer(app, many=True)
         return Response(serializer.data)
+
+
+class GetEndRecordAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        end_test = Test.objects.all().order_by('-id')[:50]
+        end_test = end_test[::-1]
+        end_test_serializer = EndTestSerializer(end_test, many=True)
+        return Response(end_test_serializer.data)
