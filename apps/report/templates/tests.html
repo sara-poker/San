@@ -73,6 +73,78 @@
   <h4 class="py-3 mb-4">
     <span class="text-muted fw-light">  تست اتصال /</span> جدول تست ها
   </h4>
+  <div class="row">
+    <div class="col-lg-12  mb-4">
+      <div class="card h-100 p-4">
+        <div class="row">
+          <form class="row g-3" action="{{ vpn.id }}" method="get">
+            <div class="col-md-2">
+              <label class="form-label" for="select2Basic">سال:</label>
+              <select disabled class="select2 form-select form-select" data-allow-clear="true" id="select2Basic"
+                      name="selected_date">
+                <option label="نمایش همگانی" value="0">نمایش همگانی</option>
+                <option label="1401" value="14010101">1401</option>
+                <option label="1402" value="14020101">1402</option>
+                <option label="1403" value="14030101">1403</option>
+
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label" for="select2Success">اپراتور</label>
+              <div class="select2-success">
+                <select class="select2 form-select" id="select2Success" multiple disabled>
+                  <option value="1" selected>ایرانسل</option>
+                  <option value="2" selected>همراه اول</option>
+                  <option value="3" selected>رایتل</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="select2Basic">اپلیکیشن:</label>
+              <select disabled class="select2 form-select form-select-lg" data-allow-clear="true" id="select2Basic"
+                      name="vpn">
+                <option label="singapore" value="0">نمایش همگانی</option>
+                {% for item in vpn %}
+                  <option label="{{ item.name }}" value="{{ item.id }}"
+                          {% if selected_vpn == item.id|stringformat:"s" %}selected{% endif %}>{{ item.name }}</option>
+                {% endfor %}
+              </select>
+
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="select2Basic2">استان:</label>
+              <select disabled class="select2 form-select form-select-lg" data-allow-clear="true" id="select2Basic2"
+                      name="country">
+                <option label="singapore" value="0">نمایش همگانی</option>
+                {% for item in country %}
+                  <option label="{{ item.name }}" value="{{ item.id }}"
+                          {% if selected_country == item.id|stringformat:"s" %}selected{% endif %}>{{ item.persian_name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label" for="select2Basic3">وضعیت:</label>
+
+              <select disabled class="select2 form-select form-select-lg" data-allow-clear="true" id="select2Basic3"
+                      name="server_country">
+                <option label="singapore" value="0">نمایش همگانی</option>
+                {% for item in country_server %}
+                  <option label="{{ item.name }}" value="{{ item.id }}"
+                          {% if selected_country_server == item.id|stringformat:"s" %}selected{% endif %}>{{ item.persian_name }}</option>
+                {% endfor %}
+              </select>
+
+            </div>
+            <div class="col-md-1">
+              <label class="form-label" for="select2Basic3">.</label>
+              <br>
+              <button disabled class="btn btn-primary" type="submit" id="applyFilter">اعمال فیلتر</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="card">
     <h5 class="card-header">لیست تست ها</h5>
     <div class="card-datatable table-responsive pt-0">
