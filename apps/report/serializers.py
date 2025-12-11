@@ -1,7 +1,8 @@
-from rest_framework.serializers import BaseSerializer
 from rest_framework import serializers
 
-from apps.test.models import Isp, App
+from apps.test.models import Isp, App,Test
+
+import jdatetime
 
 PROVINCES_FA = {
     "Alborz": "البرز",
@@ -48,3 +49,25 @@ class GetAllAppAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = App
         fields = ['id', 'name']
+
+
+class EndTestSerializer(serializers.ModelSerializer):
+    date = serializers.SerializerMethodField()
+    app = serializers.CharField(source='app.name')
+    isp = serializers.CharField(source='isp.name')
+    name2 = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Test
+        fields = '__all__'
+
+    def get_date(self, obj):
+        if obj.date:
+            jalali_date = jdatetime.date.fromgregorian(date=obj.date)
+            return f"{jalali_date.year:04d}/{jalali_date.month:02d}/{jalali_date.day:02d}"
+        return None
+
+    def get_name2(self, obj):
+        name = obj.app.name if obj.app else ""
+        return name.replace(" ", "").lower()
+
