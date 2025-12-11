@@ -166,11 +166,22 @@
       border-radius: 10px;
     }
 
+    .table-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
     .mzloading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
+      z-index: 10;
     }
 
   </style>
@@ -196,7 +207,7 @@
       const tableBody = document.querySelector('table.datatables-direct-basic tbody');
       tableBody.innerHTML = '';
 
-      // برعکس کردن ترتیب داده‌ها
+
       data.slice(0, 4).reverse().forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -650,26 +661,30 @@
       <div class="card card-mz w-100 mb-3">
         <h5 class="card-header"> آخرین تست های انجام شده</h5>
         <div class="card-datatable table-responsive pt-0 w-100">
-          <table class="datatables-direct-basic table">
-            <div class="container-fluid h-100 mzloading">
+          <div class="table-wrapper position-relative">
+
+            <div class="mzloading">
               <div class="sk-bounce sk-primary">
                 <div class="sk-bounce-dot"></div>
                 <div class="sk-bounce-dot"></div>
               </div>
             </div>
-            <thead>
-            <tr>
-              <th>آیکون</th>
-              <th>نام</th>
-              <th>اپراتور</th>
-              <th>استان</th>
-              <th>وضعیت</th>
-              <th>تاریخ</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
+
+            <table class="datatables-direct-basic table">
+              <thead>
+              <tr>
+                <th>آیکون</th>
+                <th>نام</th>
+                <th>اپراتور</th>
+                <th>استان</th>
+                <th>وضعیت</th>
+                <th>تاریخ</th>
+              </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+
+          </div>
         </div>
       </div>
     </div>
