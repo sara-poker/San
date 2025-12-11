@@ -8,7 +8,7 @@ from persiantools.jdatetime import JalaliDate
 from web_project import TemplateLayout
 
 from apps.test.models import Test, Isp, App
-from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA, GetAllAppAPISerializer
+from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA, GetAllAppAPISerializer , EndTestSerializer
 
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
@@ -248,3 +248,13 @@ class GetAllAppAPIView(APIView):
 
         serializer = GetAllAppAPISerializer(app, many=True)
         return Response(serializer.data)
+
+
+class GetEndRecordAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        end_test = Test.objects.all().order_by('-id')[:50]
+        end_test = end_test[::-1]
+        end_test_serializer = EndTestSerializer(end_test, many=True)
+        return Response(end_test_serializer.data)
