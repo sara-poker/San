@@ -194,15 +194,23 @@
     async function populateTable() {
       const data = await fetchData();
       const tableBody = document.querySelector('table.datatables-direct-basic tbody');
-      tableBody.innerHTML = ''; // پاک کردن محتواهای قبلی
+      tableBody.innerHTML = '';
 
       // برعکس کردن ترتیب داده‌ها
-      data.slice(0, 12).reverse().forEach(item => {
+      data.slice(0, 4).reverse().forEach(item => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td><img alt="User" class="rounded-circle" src="static/img/appIcon/${item.name2}.png" width="32" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/vpnIcon/default.png\';" ></td>
-          <td>${item.vpn_name.substring(0, 23)}</td>
-          <td>${translateOperator(item.oprator)}</td>
+          <td>
+            <img
+              alt="User"
+              class="rounded-circle"
+              src="${assetsPath}img/appsLogo/${item.name2}.png"
+              width="32"
+              onerror="this.onerror=null; this.src='${assetsPath}img/MyFile/logo.jpg';"
+            />
+          </td>
+          <td>${item.app.substring(0, 23)}</td>
+          <td>${item.isp}</td>
           <td>${item.city}</td>
           <td>${translateStatus(item.status)}</td>
           <td>${item.date}</td>
@@ -211,20 +219,6 @@
       });
     }
 
-    function translateOperator(operator) {
-      switch (operator) {
-        case 'Irancell':
-          return 'ایرانسل';
-        case 'MCI':
-          return 'همراه اول';
-        case 'TCI':
-          return 'مخابرات';
-        case 'RighTel':
-          return 'رایتل';
-        default:
-          return '';
-      }
-    }
 
     function translateStatus(status) {
       switch (status) {
@@ -239,10 +233,10 @@
 
     async function updateTablePeriodically() {
       let data = await fetchData();
-      let index = 12; // شروع از رکورد سیزدهم
+      let index = 4;
 
       function updateTable() {
-        if (index >= data.length) index = 0; // اگر به انتهای داده‌ها رسیدیم، برگرد به اول
+        if (index >= data.length) index = 0;
 
         const tableBody = document.querySelector('table.datatables-direct-basic tbody');
         const newRow = document.createElement('tr');
@@ -252,35 +246,42 @@
         $('.mzloading').show();
 
         newRow.innerHTML = `
-          <td><img alt="User" class="rounded-circle" src="static/img/vpnIcon/${item.name2}.png" width="32" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/vpnIcon/default.png\';"></td>
-          <td>${item.vpn_name.substring(0, 23)}</td>
-          <td>${translateOperator(item.oprator)}</td>
+          <td>
+            <img
+              alt="User"
+              class="rounded-circle"
+              src="${assetsPath}img/appsLogo/${item.name2}.png"
+              width="32"
+              onerror="this.onerror=null; this.src='${assetsPath}img/MyFile/logo.jpg';"
+            />
+          </td>
+          <td>${item.app.substring(0, 23)}</td>
+          <td>${item.isp}</td>
           <td>${item.city}</td>
           <td>${translateStatus(item.status)}</td>
           <td>${item.date}</td>
         `;
 
-        tableBody.insertBefore(newRow, tableBody.firstChild); // رکورد جدید رو به اول اضافه کن
-        if (tableBody.rows.length > 12) {
-          tableBody.deleteRow(tableBody.rows.length - 1); // اگر بیش از ۱۲ رکورد شد، آخری رو حذف کن
+        tableBody.insertBefore(newRow, tableBody.firstChild);
+        if (tableBody.rows.length > 4) {
+          tableBody.deleteRow(tableBody.rows.length - 1);
         }
 
-        // پنهان کردن لودینگ بعد از نیم ثانیه
         setTimeout(function() {
           $('.mzloading').hide();
         }, 700);
 
-        index++; // برو به رکورد بعدی
+        index++;
         const randomInterval = Math.floor(Math.random() * (12000 - 9000 + 1)) + 9000;
-        setTimeout(updateTable, randomInterval); // به‌روزرسانی بعدی با زمان تصادفی
+        setTimeout(updateTable, randomInterval);
       }
 
-      updateTable(); // اولین بار اجرا
+      updateTable();
     }
 
     $(document).ready(function() {
-      $('.mzloading').hide(); // مخفی کردن لودینگ در ابتدا
-      populateTable(); // اولین بار جدول رو پر می‌کنیم
+      $('.mzloading').hide();
+      populateTable();
       updateTablePeriodically();
     });
   </script>
