@@ -5,6 +5,7 @@
 .env
 ~$data.xlsx
 
+/config/settings.py
 
 passenger_wsgi.py
 /tmp
