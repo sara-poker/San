@@ -37,7 +37,7 @@ urlpatterns = [
     ),
     path(
         "report/app/<int:pk>/",
-        login_required(AppView.as_view(template_name="app.html")),
+        login_required(AppView.as_view(template_name="App.html")),
         name="app",
 
     ),
