@@ -214,32 +214,6 @@ class TestDetailView(TemplateView):
         return context
 
 
-class ProvinceView(TemplateView):
-    template_name = "province.html"
-
-    def dispatch(self, request, *args, **kwargs):
-        province = kwargs.get("pk")
-
-        if province not in PROVINCES_FA:
-            return redirect("/")
-
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = TemplateLayout.init(self, super().get_context_data(**kwargs))
-        province = self.kwargs["pk"]
-        speed_test = getattr(self.request, "_speed_test", {})
-
-        test_success = Test.filter(status="Without Filter")
-
-        name = PROVINCES_FA.get(province, province)
-
-        data = []
-
-        context["province"] = name
-        return context
-
-
 class IspView(TemplateView):
     template_name = "isp.html"
 
