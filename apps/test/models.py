@@ -23,8 +23,8 @@ class Isp(models.Model):
     url = models.URLField(max_length=200, verbose_name='آدرس وب‌سایت', blank=True, null=True)
     org = models.CharField(max_length=100, verbose_name='سازمان', blank=True, null=True)
     country = models.ForeignKey(Country, verbose_name='کشور', on_delete=models.PROTECT, blank=True, null=True)
-    as_number = models.CharField(max_length=50, verbose_name='AS')
-    asname = models.CharField(max_length=100, verbose_name='AS Name')
+    as_number = models.CharField(max_length=50, verbose_name='AS', blank=True, null=True)
+    asname = models.CharField(max_length=100, verbose_name='AS Name', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -50,7 +50,7 @@ class App(models.Model):
     )
 
     name = models.CharField(verbose_name='اسم', max_length=100)
-    platform = models.CharField(max_length=10, verbose_name='پلتفرم', choices=PLATFORM_CHOICE)
+    platform = models.CharField(max_length=10, verbose_name='پلتفرم', choices=PLATFORM_CHOICE, blank=True, null=True)
     maker = models.CharField(max_length=100, verbose_name='نام سازنده', blank=True, null=True)
     country = models.ForeignKey(Country, verbose_name='کشور سازنده', related_name='vpn_country',
                                 on_delete=models.PROTECT, blank=True, null=True)
@@ -71,7 +71,7 @@ class Test(models.Model):
         ('Without Filter', 'Without Filter')
     )
 
-    date = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ تست', blank=True, null=True)
+    date = models.DateTimeField(verbose_name='تاریخ تست', blank=True, null=True)
 
     city = models.CharField(verbose_name='شهر', max_length=140)
     app = models.ForeignKey(App, related_name='apps', on_delete=models.PROTECT)

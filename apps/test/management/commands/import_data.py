@@ -1,16 +1,18 @@
 from django.core.management.base import BaseCommand
 import json
 import os
+from django.utils import timezone
+from datetime import datetime
 
 from config.settings import BASE_DIR
-from apps.test.models import SpeedTest
+from apps.test.models import Test
 
 
 class Command(BaseCommand):
-    help = 'Import speed test data from JSON file into the database'
+    help = 'Import test data from JSON file into the database'
 
     def handle(self, *args, **options):
-        file_path = BASE_DIR / 'test_speedtest.json'
+        file_path = BASE_DIR / 'data.json'
 
         if not os.path.exists(file_path):
             self.stderr.write(self.style.ERROR(f"File '{file_path}' not found."))
@@ -21,27 +23,17 @@ class Command(BaseCommand):
 
         created_count = 0
         for item in data:
-            # Remove the ID if it's in the data
+            # Parse the date string to datetime objec
 
-            SpeedTest.objects.create(
-                ping_avg=item['ping_avg'],
-                jitter=item['jitter'],
-                packet_loss=item['packet_loss'],
-                speed_mbps=item['speed_mbps'],
-                loaded_size=item['loaded_size'],
-                load_time=item['load_time'],
-                upload_speed_mbps=item['upload_speed_mbps'],
-                upload_time=item['upload_time'],
-                upload_file_size=item['upload_file_size'],
-                latency=item['latency'],
-                test_state=item['test_state'],
+            Test.objects.create(
                 date=item['date'],
-                device_info_id=item['device_info_id'],
-                network_info_id=item['network_info_id'],
+                city=item['city'],
+                app_id=item['app_id'],
+                isp_id=item['isp_id'],
+                status=item['status'],
                 user_id=item['user_id'],
-                server_test_id=item['server_test_id'],
             )
             created_count += 1
-            self.stdout.write(self.style.SUCCESS(f"SpeedTest entry #{created_count} created."))
+            self.stdout.write(self.style.SUCCESS(f"Test entry #{created_count} created."))
 
         self.stdout.write(self.style.SUCCESS(f"Import finished. {created_count} new records added."))

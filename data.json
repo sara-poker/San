@@ -1,0 +1,803 @@
+[
+  {
+    "date": "2023-01-20 08:14:22.102345 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-20 10:45:11.392811 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-20 14:22:07.700839 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-20 18:05:44.219830 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 02:11:55.660123 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 07:33:10.004921 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 12:48:22.551092 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 16:20:01.883741 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 21:55:33.402110 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-22 01:10:44.923441 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-22 05:40:12.661029 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-22 09:22:55.123982 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-22 13:05:11.884732 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-22 17:44:33.002119 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-22 22:15:22.774912 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-23 03:02:11.660321 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-23 08:45:55.102931 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-23 11:20:07.441209 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-23 15:55:44.882711 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-23 20:10:33.003942 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-24 02:44:12.772101 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-24 06:15:55.660412 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-24 10:02:44.123981 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-24 14:55:22.002110 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-24 18:10:07.441092 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-24 23:45:11.883741 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-25 04:22:55.102931 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-25 09:15:44.219830 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-25 13:05:33.003942 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-25 17:44:12.772101 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-20 09:12:44.551029 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-20 12:33:07.123982 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-20 16:55:11.884732 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-20 20:10:33.002119 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 01:15:22.774912 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 05:02:11.660321 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 09:45:55.102931 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 13:20:07.441209 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 17:55:44.882711 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 22:10:33.003942 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-22 02:44:12.772101 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-22 06:15:55.660412 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-22 10:02:44.123981 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-22 14:55:22.002110 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-22 18:10:07.441092 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-22 23:45:11.883741 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-23 04:22:55.102931 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-23 09:15:44.219830 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-23 13:05:33.003942 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-23 17:44:12.772101 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-24 01:12:44.551029 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-24 05:33:07.123982 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-24 09:55:11.884732 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-24 14:10:33.002119 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-24 18:15:22.774912 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-24 22:02:11.660321 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-25 02:45:55.102931 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-25 07:20:07.441209 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-25 11:55:44.882711 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-25 16:10:33.003942 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-20 07:44:12.772101 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-20 11:15:55.660412 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-20 15:02:44.123981 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-20 19:55:22.002110 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-20 23:10:07.441092 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 04:45:11.883741 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 08:22:55.102931 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 12:15:44.219830 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 16:05:33.003942 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 21:44:12.772101 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-22 03:12:44.551029 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-22 07:33:07.123982 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-22 11:55:11.884732 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-22 16:10:33.002119 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-22 20:15:22.774912 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-23 01:02:11.660321 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-23 05:45:55.102931 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-23 09:20:07.441209 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-23 13:55:44.882711 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-23 18:10:33.003942 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-24 02:44:12.772101 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-24 06:15:55.660412 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-24 10:02:44.123981 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-24 14:55:22.002110 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-24 19:10:07.441092 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-25 00:45:11.883741 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-25 05:22:55.102931 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-25 10:15:44.219830 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-25 14:05:33.003942 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-25 19:44:12.772101 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-20 08:12:44.551029 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-20 12:33:07.123982 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-20 16:55:11.884732 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-20 21:10:33.002119 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 02:15:22.774912 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 06:02:11.660321 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 10:45:55.102931 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 3,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 14:20:07.441209 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 1,
+    "isp_id": 3,
+    "user_id": 2
+  },
+  {
+    "date": "2023-01-21 18:55:44.882711 +00:00",
+    "city": "تهران",
+    "status": "Filter",
+    "app_id": 2,
+    "isp_id": 1,
+    "user_id": 3
+  },
+  {
+    "date": "2023-01-21 23:10:33.003942 +00:00",
+    "city": "تهران",
+    "status": "Without Filter",
+    "app_id": 1,
+    "isp_id": 1,
+    "user_id": 2
+  }
+]
+

@@ -57,6 +57,12 @@ urlpatterns = [
         "api/get_end_record/",
         GetEndRecordAPIView.as_view(),
         name="get_end_record",
+    ),
+
+    path(
+        "api/add_record/",
+        AddRecordAPIView.as_view(),
+        name="add_record",
     )
 
 ]

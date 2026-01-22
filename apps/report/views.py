@@ -1,18 +1,34 @@
 from django.views.generic import (TemplateView)
 from django.contrib.auth import get_user_model
+from django.db import transaction
 from django.db.models import Exists, OuterRef, Avg, Count, Q
 from django.shortcuts import redirect, get_object_or_404
+from django.utils import timezone
 
 from persiantools.jdatetime import JalaliDate
 
 from web_project import TemplateLayout
 
 from apps.test.models import Test, Isp, App
-from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA, GetAllAppAPISerializer, EndTestSerializer
+from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA, GetAllAppAPISerializer, EndTestSerializer, AddRecordSerializer
 
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, BasePermission
 from rest_framework.response import Response
+from rest_framework import status as drf_status
+
+
+class HasValidSecretKey(BasePermission):
+    message = "Invalid or missing secret key."
+
+    def has_permission(self, request, view):
+        secret = request.headers.get("X-SECRET-KEY")
+
+        if not secret:
+            return False
+
+        return secret == 'IZIQ3PI5M3M7QoLT7nQEoz5-aEGj_fDxJpdriSeWx1XsWgXiPPaqCGLIHdQKm6WODcS2qVSkUtj8SIZlQjOfmCJ2itcT'
+
 
 
 def convert_date(date):
@@ -296,3 +312,66 @@ class GetEndRecordAPIView(APIView):
         end_test = end_test[::-1]
         end_test_serializer = EndTestSerializer(end_test, many=True)
         return Response(end_test_serializer.data)
+
+
+class AddRecordAPIView(APIView):
+    permission_classes = [HasValidSecretKey]
+
+    @transaction.atomic
+    def post(self, request):
+        serializer = AddRecordSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        app_name = serializer.validated_data["app"]
+        isp_name = serializer.validated_data["isp"]
+        city = serializer.validated_data["city"]
+        record_status = serializer.validated_data["status"]
+
+        # --- App (case-insensitive, race-safe)
+        app_obj = (
+            App.objects
+            .select_for_update()
+            .filter(name__iexact=app_name)
+            .first()
+        )
+        if not app_obj:
+            app_obj = App.objects.create(name=app_name)
+
+        # --- ISP (case-insensitive, race-safe)
+        isp_obj = (
+            Isp.objects
+            .select_for_update()
+            .filter(name__iexact=isp_name)
+            .first()
+        )
+        if not isp_obj:
+            isp_obj = Isp.objects.create(name=isp_name)
+
+        # --- Create Test record
+        test = Test.objects.create(
+            date=timezone.now(),
+            city=city,
+            status=record_status,
+            app=app_obj,
+            isp=isp_obj,
+            user_id=2,
+        )
+
+        return Response(
+            {
+                "id": test.id,
+                "date": test.date,
+                "city": test.city,
+                "status": test.status,
+                "app": {
+                    "id": app_obj.id,
+                    "name": app_obj.name,
+                },
+                "isp": {
+                    "id": isp_obj.id,
+                    "name": isp_obj.name,
+                },
+                "user_id": 2,
+            },
+            status=drf_status.HTTP_201_CREATED,
+        )

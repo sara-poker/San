@@ -71,3 +71,14 @@ class EndTestSerializer(serializers.ModelSerializer):
         name = obj.app.name if obj.app else ""
         return name.replace(" ", "").lower()
 
+class AddRecordSerializer(serializers.Serializer):
+    app = serializers.CharField(max_length=255)
+    isp = serializers.CharField(max_length=255)
+    city = serializers.CharField(max_length=255)
+    status = serializers.CharField(max_length=255)
+
+    def validate(self, attrs):
+        for key, value in attrs.items():
+            attrs[key] = value.strip()
+        return attrs
+
