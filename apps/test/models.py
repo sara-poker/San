@@ -20,7 +20,7 @@ class Isp(models.Model):
     )
 
     name = models.CharField(max_length=80, verbose_name='اسم')
-    url = models.URLField(max_length=200, verbose_name='آدرس وب‌سایت', blank=True, null=True)
+    url = models.CharField(max_length=200, verbose_name='آدرس وب‌سایت', blank=True, null=True)
     org = models.CharField(max_length=100, verbose_name='سازمان', blank=True, null=True)
     country = models.ForeignKey(Country, verbose_name='کشور', on_delete=models.PROTECT, blank=True, null=True)
     as_number = models.CharField(max_length=50, verbose_name='AS', blank=True, null=True)

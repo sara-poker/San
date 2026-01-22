@@ -38,6 +38,39 @@ PROVINCES_FA = {
 
 }
 
+PROVINCES_FA_REVERSED = {
+    "البرز": "Alborz",
+    "اردبیل": "Ardabil",
+    "آذربایجان شرقی": "Aazerbaijan-East",
+    "بوشهر": "Bushehr",
+    "چهارمحال و بختیاری": "Chahaar-Mahaal-Bakhtiaari",
+    "فارس": "Fars",
+    "گیلان": "Gilaan",
+    "گلستان": "Golestaan",
+    "همدان": "Hamadaan",
+    "هرمزگان": "Hormozgaan",
+    "ایلام": "Ilaam",
+    "اصفهان": "Isfahaan",
+    "کرمان": "Kermaan",
+    "کرمانشاه": "Kermanshaah",
+    "خراسان شمالی": "Khoraasaan-North",
+    "خراسان رضوی": "Khoraasaan-Razavi",
+    "خراسان جنوبی": "Khoraasaan-South",
+    "خوزستان": "Khuzestaan",
+    "کهگیلوی و بویراحمد": "Kohgiluyeh-Boyer-Ahmad",
+    "کردستان": "Kurdistaan",
+    "لرستان": "Lorestaan",
+    "مرکزی": "Markazi",
+    "مازندران": "Maazandaraan",
+    "قزوین": "Qazvin",
+    "قم": "Qom",
+    "سمنان": "Semnaan",
+    "سیستان و بلوچستان": "Sistaan-Baluchestaan",
+    "تهران": "Tehran",
+    "یزد": "Yazd",
+    "زنجان": "Zanjaan",
+}
+
 
 class GetAllIspAPISerializer(serializers.ModelSerializer):
     class Meta:

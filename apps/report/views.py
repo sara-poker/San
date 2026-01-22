@@ -10,7 +10,9 @@ from persiantools.jdatetime import JalaliDate
 from web_project import TemplateLayout
 
 from apps.test.models import Test, Isp, App
-from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA, GetAllAppAPISerializer, EndTestSerializer, AddRecordSerializer
+from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA_REVERSED, GetAllAppAPISerializer, \
+    EndTestSerializer, \
+    AddRecordSerializer
 
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, BasePermission
@@ -28,7 +30,6 @@ class HasValidSecretKey(BasePermission):
             return False
 
         return secret == 'IZIQ3PI5M3M7QoLT7nQEoz5-aEGj_fDxJpdriSeWx1XsWgXiPPaqCGLIHdQKm6WODcS2qVSkUtj8SIZlQjOfmCJ2itcT'
-
 
 
 def convert_date(date):
@@ -138,7 +139,49 @@ class ReportDashboardsView(TemplateView):
 
         bad_isp = Isp.objects.only("id", "name", "as_number").get(pk=bad_isp_id["isp"]) if bad_isp_id else None
 
+        qs = (
+            Test.objects
+            .filter(city__isnull=False)
+            .values('city')
+            .annotate(
+                total_count=Count('id'),
+                filter_count=Count('id', filter=Q(status='Filter'))
+            )
+        )
+
+        def categorize(v):
+            if v <= 100:
+                return 'very_fast'
+            if v <= 75:
+                return 'fast'
+            if v <= 50:
+                return 'middle'
+            if v <= 25:
+                return 'slow'
+            return 'no-data'
+
         province_data = {}
+
+        for row in qs:
+            province_fa = row['city']  # نام فارسی استان
+            total = row['total_count']
+            filtered = row['filter_count']
+
+            if total == 0:
+                continue
+
+            # تبدیل نام فارسی به انگلیسی (برای SVG)
+            province_en = PROVINCES_FA_REVERSED.get(province_fa)
+            if not province_en:
+                continue  # استان ناشناخته یا ناسازگار با نقشه
+
+            percentage = round((filtered / total) * 100, 2)
+
+            province_data[province_en] = {
+                'avg': percentage,
+                'category': categorize(percentage)
+            }
+
         context['province_data'] = province_data
 
         context['best_app'] = best_app
