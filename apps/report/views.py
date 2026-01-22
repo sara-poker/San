@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.views.generic import (TemplateView)
 from django.contrib.auth import get_user_model
 from django.db import transaction
@@ -101,19 +102,14 @@ class ReportDashboardsView(TemplateView):
     template_name = "your_template.html"
 
     def get_context_data(self, **kwargs):
-        # مقداردهی اولیه کانتکس
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
-        # ۱. تلاش برای خواندن از کش
         cached_data = cache.get("report:dashboard_data")
 
-        # ۲. اگر کش خالی بود (Fallback)
         if not cached_data:
             cached_data = calculate_report_dashboard_data()
-            # ذخیره مجدد در کش برای احتیاط
             cache.set("report:dashboard_data", cached_data, timeout=86400)
 
-        # ۳. تزریق داده‌ها به کانتکس
         context.update(cached_data)
 
         return context
@@ -146,38 +142,24 @@ class IspView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
+        isp_id = self.kwargs['pk']
 
-        isp = get_object_or_404(Isp, pk=self.kwargs['pk'])
+        cache_key = f"isp:stats:{isp_id}"
 
-        speed_test = Test.objects.filter(isp_id=self.kwargs['pk'])
+        cached_data = cache.get(cache_key)
 
-        success_speed_test_list = speed_test.filter(status="Filter")
-        success_speed_test = success_speed_test_list.count()
-        fail_speed_test = speed_test.count() - success_speed_test
+        if not cached_data:
+            cached_data = calculate_isp_stats(isp_id)
+            if cached_data:
+                cache.set(cache_key, cached_data, timeout=86400)
+            else:
+                raise Http404("No data for this ISP")
 
-        success_speed_test_percent = round((success_speed_test * 100) / speed_test.count(), 2)
-        fail_speed_test_percent = round((100 - success_speed_test_percent), 2)
+        context.update(cached_data)
 
-        unique_users_ids = speed_test.values_list('user', flat=True).distinct()
-        User = get_user_model()
-        unique_users = User.objects.filter(id__in=unique_users_ids)
+        context['isp'] = get_object_or_404(Isp, pk=isp_id)
 
-        unique_apps_ids = speed_test.values_list('app', flat=True).distinct()
-        unique_apps = App.objects.filter(id__in=unique_apps_ids)
-
-        context['isp'] = isp
-
-        context['test_count'] = speed_test.count()
-        context['success_speed_test'] = success_speed_test
-        context['fail_speed_test'] = fail_speed_test
-        context['success_speed_test_percent'] = success_speed_test_percent
-        context['fail_speed_test_percent'] = fail_speed_test_percent
-
-        context['apps_count'] = unique_apps.count
-        context['unique_apps'] = list(unique_apps)
-
-        context['users_count'] = unique_users.count()
-        context['unique_users'] = list(unique_users)
+        return context
 
         return context
 

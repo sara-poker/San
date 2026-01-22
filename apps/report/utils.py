@@ -1,5 +1,7 @@
-# your_app/utils.py
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 from django.db.models import Count, Q
+
 from apps.test.models import Test, Isp, App
 from apps.report.serializers import *
 
@@ -44,14 +46,18 @@ def calculate_report_dashboard_data():
     )
 
     def categorize(v):
-        if v <= 100:
-            return 'very_fast'
-        if v <= 75:
-            return 'fast'
-        if v <= 50:
-            return 'middle'
+        if v is None:
+            return 'no-data'
+
         if v <= 25:
             return 'slow'
+        elif v <= 50:
+            return 'middle'
+        elif v <= 75:
+            return 'fast'
+        elif v <= 100:
+            return 'very_fast'
+
         return 'no-data'
 
     province_data = {}
@@ -70,5 +76,45 @@ def calculate_report_dashboard_data():
             'category': categorize(percentage)
         }
 
+    print("province_data>>", province_data)
+
     data['province_data'] = province_data
     return data
+
+
+def calculate_isp_stats(isp_id):
+    """محاسبه آمار اختصاصی برای یک ISP خاص"""
+    isp = get_object_or_404(Isp, pk=isp_id)
+    speed_test = Test.objects.filter(isp_id=isp_id)
+
+    total_count = speed_test.count()
+    if total_count == 0:
+        return None
+
+    success_speed_test = speed_test.filter(status="Filter").count()
+    fail_speed_test = total_count - success_speed_test
+
+    success_percent = round((success_speed_test * 100) / total_count, 2)
+    fail_percent = round((100 - success_percent), 2)
+
+    User = get_user_model()
+    unique_users_ids = speed_test.values_list('user', flat=True).distinct()
+    unique_users = list(
+        User.objects.filter(id__in=unique_users_ids).values('id', 'username'))
+
+    unique_apps_ids = speed_test.values_list('app', flat=True).distinct()
+    unique_apps = list(App.objects.filter(id__in=unique_apps_ids).values('id', 'name'))
+
+    return {
+        'isp_name': isp.name,
+        'isp_id': isp.id,
+        'test_count': total_count,
+        'success_speed_test': success_speed_test,
+        'fail_speed_test': fail_speed_test,
+        'success_speed_test_percent': success_percent,
+        'fail_speed_test_percent': fail_percent,
+        'apps_count': len(unique_apps),
+        'unique_apps': unique_apps,
+        'users_count': len(unique_users),
+        'unique_users': unique_users,
+    }
