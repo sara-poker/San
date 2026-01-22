@@ -155,6 +155,8 @@ class IspView(TemplateView):
             else:
                 raise Http404("No data for this ISP")
 
+        print("isp cached_data>>", cached_data)
+
         context.update(cached_data)
 
         context['isp'] = get_object_or_404(Isp, pk=isp_id)

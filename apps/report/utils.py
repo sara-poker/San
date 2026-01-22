@@ -100,7 +100,7 @@ def calculate_isp_stats(isp_id):
     User = get_user_model()
     unique_users_ids = speed_test.values_list('user', flat=True).distinct()
     unique_users = list(
-        User.objects.filter(id__in=unique_users_ids).values('id', 'username'))
+        User.objects.filter(id__in=unique_users_ids).values('id', 'username','name'))
 
     unique_apps_ids = speed_test.values_list('app', flat=True).distinct()
     unique_apps = list(App.objects.filter(id__in=unique_apps_ids).values('id', 'name'))
