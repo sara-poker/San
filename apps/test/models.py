@@ -29,6 +29,7 @@ class Isp(models.Model):
     def __str__(self):
         return self.name
 
+
 class App(models.Model):
     class Meta:
         verbose_name = 'نرم افزار'
@@ -48,13 +49,13 @@ class App(models.Model):
         ('Non-free', 'Non-free')
     )
 
-    name = models.CharField(verbose_name='اسم',max_length=100)
+    name = models.CharField(verbose_name='اسم', max_length=100)
     platform = models.CharField(max_length=10, verbose_name='پلتفرم', choices=PLATFORM_CHOICE)
     maker = models.CharField(max_length=100, verbose_name='نام سازنده', blank=True, null=True)
     country = models.ForeignKey(Country, verbose_name='کشور سازنده', related_name='vpn_country',
-                                    on_delete=models.PROTECT, blank=True, null=True)
+                                on_delete=models.PROTECT, blank=True, null=True)
     normal_user_fee = models.CharField(max_length=12, verbose_name='وضعیت رایگان بودن', choices=CHOICE, null=True,
-                                           blank=True)
+                                       blank=True)
 
     def __str__(self):
         return self.name
