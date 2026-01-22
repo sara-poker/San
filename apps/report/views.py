@@ -4,15 +4,15 @@ from django.db import transaction
 from django.db.models import Exists, OuterRef, Avg, Count, Q
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
+from django.core.cache import cache
 
 from persiantools.jdatetime import JalaliDate
 
 from web_project import TemplateLayout
 
 from apps.test.models import Test, Isp, App
-from apps.report.serializers import GetAllIspAPISerializer, PROVINCES_FA_REVERSED, GetAllAppAPISerializer, \
-    EndTestSerializer, \
-    AddRecordSerializer
+from apps.report.serializers import *
+from apps.report.utils import *
 
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, BasePermission
@@ -98,96 +98,23 @@ def filter_operator(oprator, queryset):
 
 # Create your views here.
 class ReportDashboardsView(TemplateView):
+    template_name = "your_template.html"
+
     def get_context_data(self, **kwargs):
+        # مقداردهی اولیه کانتکس
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
 
-        base_qs = Test.objects.filter(status="Filter")
+        # ۱. تلاش برای خواندن از کش
+        cached_data = cache.get("report:dashboard_data")
 
-        best_app_id = (
-            base_qs.values("app")
-            .annotate(c=Count("app"))
-            .order_by("-c")
-            .first()
-        )
+        # ۲. اگر کش خالی بود (Fallback)
+        if not cached_data:
+            cached_data = calculate_report_dashboard_data()
+            # ذخیره مجدد در کش برای احتیاط
+            cache.set("report:dashboard_data", cached_data, timeout=86400)
 
-        best_app = App.objects.only("id", "name").get(pk=best_app_id["app"]) if best_app_id else None
-
-        bad_app_id = (
-            base_qs.values("app")
-            .annotate(c=Count("app"))
-            .order_by("c")
-            .first()
-        )
-
-        bad_app = App.objects.only("id", "name").get(pk=bad_app_id["app"]) if bad_app_id else None
-
-        best_isp_id = (
-            base_qs.values("isp")
-            .annotate(c=Count("isp"))
-            .order_by("-c")
-            .first()
-        )
-
-        best_isp = Isp.objects.only("id", "name", "as_number").get(pk=best_isp_id["isp"]) if best_isp_id else None
-
-        bad_isp_id = (
-            base_qs.values("isp")
-            .annotate(c=Count("isp"))
-            .order_by("c")
-            .first()
-        )
-
-        bad_isp = Isp.objects.only("id", "name", "as_number").get(pk=bad_isp_id["isp"]) if bad_isp_id else None
-
-        qs = (
-            Test.objects
-            .filter(city__isnull=False)
-            .values('city')
-            .annotate(
-                total_count=Count('id'),
-                filter_count=Count('id', filter=Q(status='Filter'))
-            )
-        )
-
-        def categorize(v):
-            if v <= 100:
-                return 'very_fast'
-            if v <= 75:
-                return 'fast'
-            if v <= 50:
-                return 'middle'
-            if v <= 25:
-                return 'slow'
-            return 'no-data'
-
-        province_data = {}
-
-        for row in qs:
-            province_fa = row['city']  # نام فارسی استان
-            total = row['total_count']
-            filtered = row['filter_count']
-
-            if total == 0:
-                continue
-
-            # تبدیل نام فارسی به انگلیسی (برای SVG)
-            province_en = PROVINCES_FA_REVERSED.get(province_fa)
-            if not province_en:
-                continue  # استان ناشناخته یا ناسازگار با نقشه
-
-            percentage = round((filtered / total) * 100, 2)
-
-            province_data[province_en] = {
-                'avg': percentage,
-                'category': categorize(percentage)
-            }
-
-        context['province_data'] = province_data
-
-        context['best_app'] = best_app
-        context['bad_app'] = bad_app
-        context['best_isp'] = best_isp
-        context['bad_isp'] = bad_isp
+        # ۳. تزریق داده‌ها به کانتکس
+        context.update(cached_data)
 
         return context
 

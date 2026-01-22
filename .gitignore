@@ -10,6 +10,7 @@
 passenger_wsgi.py
 /tmp
 /public
+/django_cache/*
 
 apps/vpn/migrations/*
 
