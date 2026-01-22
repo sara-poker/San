@@ -43,8 +43,8 @@ class Command(BaseCommand):
                     city="تهران",
                     status=status,
                     app_id=random.choice([1, 2]),
-                    isp_id=random.choice([1, 3]),
-                    user_id=random.choice([2, 3]),
+                    isp_id=random.choice([1, 2]),
+                    user_id=random.choice([1, 2]),
                 )
             )
 
