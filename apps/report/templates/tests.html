@@ -172,7 +172,7 @@
           <td>
             {{ test.isp.name }} |
             <img alt="{{ test.isp.name }}"
-                 src="{% static 'img/ispLogo/RGB/' %}{{ test.isp.as_number }}.png"
+                 src="{% static 'img/ispLogo/RGB/' %}{{ test.isp.id }}.png"
                  height="25"
                  onerror="this.onerror=null; this.src='{% static 'img/MyFile/logo.png' %}';">
           </td>
@@ -186,7 +186,7 @@
           <td>
             {{ test.app.name }} |
             <img alt="{{ test.app.name }}"
-                 src="{% static 'img/appsLogo/' %}{{ test.app.name|lower|cut:' ' }}.png"
+                 src="{% static 'img/appsLogo/' %}{{ test.app.id }}.png"
                  height="25"
                  onerror="this.onerror=null; this.src='{% static 'img/MyFile/logo.png' %}';"
             >
