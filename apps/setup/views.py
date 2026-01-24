@@ -56,6 +56,36 @@ class SetupAppView(TemplateView):
         return redirect(request.path)
 
 
+class SetupIspView(TemplateView):
+    def get_context_data(self, **kwargs):
+        context = TemplateLayout.init(self, super().get_context_data(**kwargs))
+        # دریافت اطلاعات اپراتور (ISP)
+        isp_instance = get_object_or_404(Isp, id=self.kwargs['pk'])
+
+        context['isp'] = isp_instance
+        context['countries'] = Country.objects.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        isp_instance = get_object_or_404(Isp, id=self.kwargs['pk'])
+
+        # استخراج داده‌ها از فرم ارسال شده
+        isp_instance.name = request.POST.get('name')
+        isp_instance.url = request.POST.get('url')
+        isp_instance.org = request.POST.get('org')
+        isp_instance.as_number = request.POST.get('as_number')
+        isp_instance.asname = request.POST.get('asname')
+
+        country_id = request.POST.get('country')
+        if country_id:
+            isp_instance.country = Country.objects.get(id=country_id)
+
+        isp_instance.save()
+
+        # ریدایرکت به همان صفحه برای مشاهده تغییرات
+        return redirect(request.path)
+
+
 class UserDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))

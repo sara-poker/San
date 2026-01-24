@@ -42,10 +42,10 @@ menu_manager = {
                     "pk": 1
                 },
                 {
-                    "url": "#",
-                    "external": True,
+                    "url": "setup_isp",
                     "name": "مدیریت اپراتور ها",
-                    "slug": "test",
+                    "slug": "setup_isp",
+                    "pk": 1
                 },
                 {
                     "url": "usersTable",

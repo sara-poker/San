@@ -143,8 +143,8 @@
       // DataTable with buttons
       if (dt_basic_table.length) {
         var reportType = '{{ report_type }}';
-        url1 = '/api/get_all_isp_server_test/';
-        url2 = '/report/isp_server_test/';
+        var url1 = '/api/get_all_isp/';
+        var url2 = '/setup/isp/';
 
         var dt_basic = dt_basic_table.DataTable({
           ajax: {
@@ -168,7 +168,7 @@
                 if (id) {
                   return (
                     '<a href="' + url2 + id + '">' +
-                    '<img src="' + assetsPath + 'img/appsLogo/' + name.toLowerCase() + '.png' + '" ' +
+                    '<img src="' + assetsPath + 'img/ispLogo/RGB/' + asnumber + '.png' + '" ' +
                     'alt="Avatar" width="60" class="rounded-circle" ' +
                     'loading="lazy" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/MyFile/logo.jpg\';">' +
                     '</a>'
@@ -274,39 +274,36 @@
 
           <div class="col-lg-8">
             <div class="card p-4">
-              <h5 class="card-header">ویرایش اطلاعات نرم‌افزار: {{ app.name }}</h5>
+              <h5 class="card-header">ویرایش اطلاعات اپراتور: {{ isp.name }}</h5>
 
-              <form id="appForm" method="POST">
+              <form id="ispForm" method="POST">
                 {% csrf_token %}
                 <div class="row g-3">
 
                   <div class="col-md-6">
-                    <label class="form-label" for="name">اسم نرم افزار</label>
-                    <input name="name" class="form-control" id="name" type="text" value="{{ app.name }}" required />
+                    <label class="form-label" for="name">نام اپراتور</label>
+                    <input name="name" class="form-control" id="name" type="text"
+                           value="{{ isp.name }}" required />
                   </div>
 
                   <div class="col-md-6">
-                    <label class="form-label" for="maker">نام سازنده</label>
-                    <input name="maker" class="form-control" id="maker" type="text"
-                           value="{{ app.maker|default:'' }}" />
+                    <label class="form-label" for="org">سازمان</label>
+                    <input name="org" class="form-control" id="org" type="text"
+                           value="{{ isp.org|default:'' }}" />
+                  </div>
+
+                  <div class="col-md-12">
+                    <label class="form-label" for="url">آدرس وب‌سایت</label>
+                    <input name="url" class="form-control" id="url" type="text"
+                           value="{{ isp.url|default:'' }}" placeholder="https://example.com" />
                   </div>
 
                   <div class="col-md-4">
-                    <label class="form-label">پلتفرم</label>
-                    <select name="platform" class="select2 form-select">
-                      <option value="">انتخاب کنید</option>
-                      {% for val, label in platforms %}
-                        <option value="{{ val }}" {% if app.platform == val %}selected{% endif %}>{{ label }}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-
-                  <div class="col-md-4">
-                    <label class="form-label">کشور سازنده</label>
+                    <label class="form-label">کشور</label>
                     <select name="country" class="select2 form-select">
                       <option value="">انتخاب کشور</option>
                       {% for c in countries %}
-                        <option value="{{ c.id }}" {% if app.country.id == c.id %}selected{% endif %}>
+                        <option value="{{ c.id }}" {% if isp.country.id == c.id %}selected{% endif %}>
                           {{ c.name }}
                         </option>
                       {% endfor %}
@@ -314,14 +311,15 @@
                   </div>
 
                   <div class="col-md-4">
-                    <label class="form-label">وضعیت رایگان بودن</label>
-                    <select name="normal_user_fee" class="select2 form-select">
-                      <option value="">انتخاب وضعیت</option>
-                      {% for val, label in fees %}
-                        <option value="{{ val }}"
-                                {% if app.normal_user_fee == val %}selected{% endif %}>{{ label }}</option>
-                      {% endfor %}
-                    </select>
+                    <label class="form-label" for="as_number">AS Number</label>
+                    <input name="as_number" class="form-control" id="as_number" type="text"
+                           value="{{ isp.as_number|default:'' }}" />
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label" for="asname">AS Name</label>
+                    <input name="asname" class="form-control" id="asname" type="text"
+                           value="{{ isp.asname|default:'' }}" />
                   </div>
 
                 </div>
@@ -331,7 +329,7 @@
                 <div class="d-flex justify-content-end mt-4">
                   <button class="btn btn-primary me-2" type="submit">
                     <i class="ti ti-device-floppy me-1"></i>
-                    ذخیره تغییرات
+                    ذخیره اطلاعات اپراتور
                   </button>
                 </div>
               </form>
