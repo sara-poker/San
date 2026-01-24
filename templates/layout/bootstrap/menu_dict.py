@@ -36,15 +36,15 @@ menu_manager = {
             "slug": "setting",
             "submenu": [
                 {
-                    "url": "#",
-                    "external": True,
-                    "name": "مدیریت اپراتور ها",
-                    "slug": "test",
+                    "url": "setup_app",
+                    "name": "مدیریت نرم افزار ها",
+                    "slug": "setup_app",
+                    "pk": 1
                 },
                 {
                     "url": "#",
                     "external": True,
-                    "name": "مدیریت نرم افزار ها",
+                    "name": "مدیریت اپراتور ها",
                     "slug": "test",
                 },
                 {

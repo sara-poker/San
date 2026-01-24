@@ -227,11 +227,10 @@
 
       // DataTable with buttons
       if (dt_basic_table.length) {
-        console.log('>>hello');
+
         var reportType = '{{ report_type }}';
         var url1 = '/api/get_all_isp/';
         var url2 = '/report/isp/';
-        console.log('>>>', reportType);
 
         if (reportType === 'server_test') {
           url1 = '/api/get_all_isp_server_test/';

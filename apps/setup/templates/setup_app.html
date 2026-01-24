@@ -1,0 +1,344 @@
+{% extends layout_path %}
+{% load static %}
+{% load i18n %}
+{% load jformat %}
+
+{% block title %}ویرایش  {{ app.name }}{% endblock %}
+
+{% block vendor_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'vendor/libs/apex-charts/apex-charts.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/swiper/swiper.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/datatables-bs5/datatables.bootstrap5.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/select2/select2.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/tagify/tagify.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/bootstrap-select/bootstrap-select.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/typeahead-js/typeahead.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/flatpickr/flatpickr.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/jquery-timepicker/jquery-timepicker.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/pickr/pickr-themes.css' %}" />
+{% endblock vendor_css %}
+
+{% block vendor_js %}
+  {{ block.super }}
+  <script src="{% static 'vendor/libs/apex-charts/apexcharts.js' %}"></script>
+  <script src="{% static 'vendor/libs/swiper/swiper.js' %}"></script>
+  <script src="{% static 'vendor/libs/datatables-bs5/datatables-bootstrap5.js' %}"></script>
+  <script src="{% static 'amcharts5/index.js' %} "></script>
+  <script src="{% static 'amcharts5/hierarchy.js' %} "></script>
+  <script src="{% static 'amcharts5/themes/Animated.js' %} "></script>
+  <script src="{% static 'amcharts5/plugins/exporting.js' %} "></script>
+  <script src="{% static 'vendor/libs/select2/select2.js' %}"></script>
+  <script src="{% static 'libs/select2/i18n/fa.js' %}"></script>
+  <script src="{% static 'vendor/libs/tagify/tagify.js' %}"></script>
+  <script src="{% static 'vendor/libs/bootstrap-select/bootstrap-select.js' %}"></script>
+  <script src="{% static 'libs/bootstrap-select/i18n/defaults-fa_IR.js' %}"></script>
+  <script src="{% static 'vendor/libs/typeahead-js/typeahead.js' %}"></script>
+  <script src="{% static 'vendor/libs/bloodhound/bloodhound.js' %}"></script>
+  <script src="{% static 'js/forms-selects.js' %}"></script>
+  <script src="{% static 'js/forms-tagify.js' %}"></script>
+  <script src="{% static 'js/forms-typeahead.js' %}"></script>
+  <script src="{% static 'js/loading.js' %}"></script>
+  <script src="{% static 'vendor/libs/moment/moment.js' %}"></script>
+  <script src="{% static 'libs/jdate/jdate.min.js' %}"></script>
+  <script src="{% static 'vendor/libs/flatpickr/flatpickr.js' %}"></script>
+  <script src="{% static 'libs/flatpickr/flatpickr-jdate.js' %}"></script>
+  <script src="{% static 'libs/flatpickr-jalali/dist/l10n/fa.js' %}"></script>
+  <script src="{% static 'vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js' %}"></script>
+  <script src="{% static 'vendor/libs/jquery-timepicker/jquery-timepicker.js' %}"></script>
+  <script src="{% static 'vendor/libs/pickr/pickr.js' %}"></script>
+  <script src="{% static 'focus/index.min.js' %}"></script>
+  <script src="{% static 'js/report-dashboard.js' %}"></script>
+  <script src="{% static 'vendor/libs/@form-validation/umd/bundle/popular.min.js' %}"></script>
+  <script src="{% static 'vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js' %}"></script>
+{% endblock vendor_js %}
+
+{% block page_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'vendor/css/pages/cards-advance.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/spinkit/spinkit.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/libs/@form-validation/umd/styles/index.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'vendor/css/pages/page-profile.css' %}" />
+  <style>
+    #chartdiv {
+      direction: ltr;
+      width: 100%;
+      height: 500px;
+    }
+
+    .mzloading {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 5500;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 75%;
+    }
+
+    th, td {
+      text-align: center !important;
+    }
+
+    tr {
+      transition: all .2s;
+    }
+
+    tr:hover {
+      background: #eee !important;
+      cursor: pointer;
+    }
+
+    .dt-buttons {
+      display: none;
+    }
+
+    .form-label {
+      font-weight: 500;
+    }
+
+    .my-task-row {
+      background-color: #f1f3f5 !important;
+      font-weight: 500;
+    }
+  </style>
+  <style>
+    .my-task-row {
+      background-color: rgba(133, 240, 103, 0.08) !important;
+      border-right: 3px solid #11bb2c;
+    }
+
+    .my-task-row:hover {
+      background-color: rgba(133, 240, 103, 0.15) !important;
+    }
+
+    #my_tasks_table tbody tr {
+      transition: all 0.2s ease;
+    }
+
+    #my_tasks_table tbody tr:hover {
+      transform: translateX(-3px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+{% endblock page_css %}
+
+{% block page_js %}
+  {{ block.super }}
+  <script src="{% static 'js/forms-pickers-jalali.js' %}"></script>
+  <script>
+    $(function() {
+
+      var dt_basic_table = $('#my_tasks_table');
+
+      // DataTable with buttons
+      if (dt_basic_table.length) {
+        var reportType = '{{ report_type }}';
+        var url1 = '/api/get_all_app/';
+        var url2 = '/setup/app/';
+
+        var dt_basic = dt_basic_table.DataTable({
+          ajax: {
+            url: window.location.origin + url1,
+            dataSrc: ''
+          },
+          language: {
+            url: assetsPath + 'json/i18n/datatables-bs5/fa.json'
+          },
+          columns: [
+            { data: '' },
+            {
+              targets: 0,
+              orderable: false,
+              searchable: false,
+              responsivePriority: 1,
+              render: function(data, type, full, meta) {
+                var id = full['id'];
+                var name = full['name'];
+                var asnumber = full['as_number'];
+                if (id) {
+                  return (
+                    '<a href="' + url2 + id + '">' +
+                    '<img src="' + assetsPath + 'img/appsLogo/' + name.toLowerCase() + '.png' + '" ' +
+                    'alt="Avatar" width="60" class="rounded-circle" ' +
+                    'loading="lazy" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/MyFile/logo.jpg\';">' +
+                    '</a>'
+                  );
+                } else {
+                  return '';
+                }
+              }
+            },
+            {
+              data: 'name',
+              render: function(data, type, full, meta) {
+                return '<a href="' + url2 + full['id'] + '">' + data + '</a>';
+              }
+            }
+          ],
+          columnDefs: [
+            {
+              className: 'control',
+              orderable: false,
+              searchable: false,
+              responsivePriority: 2,
+              targets: 0,
+              render: function(data, type, full, meta) {
+                return '';
+              }
+            }
+          ],
+          order: [[1, 'asc']],
+          dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+          displayLength: 7,
+          lengthMenu: [7, 10, 25, 50, 75, 100],
+          responsive: {
+            details: {
+              display: $.fn.dataTable.Responsive.display.modal({
+                header: function(row) {
+                  var data = row.data();
+                  return 'جزئیات ' + data['name'];
+                }
+              }),
+              type: 'column',
+              renderer: function(api, rowIdx, columns) {
+                var data = $.map(columns, function(col, i) {
+                  return col.title !== ''
+                    ? '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' +
+                    '<td>' + col.title + ':</td><td>' + col.data + '</td>' +
+                    '</tr>'
+                    : '';
+                }).join('');
+                return data ? $('<table class="table"/><tbody />').append(data) : false;
+              }
+            }
+          }
+        });
+
+        // این کد برای لود کردن تصاویر جدید هنگام تغییر صفحه است
+        dt_basic.on('draw', function() {
+          var pageInfo = dt_basic.page.info();
+          var page = pageInfo.page;
+
+          // می‌توانید با استفاده از page، تصاویر صفحه فعلی را لود کنید.
+          // در اینجا فقط از ویژگی lazy loading استفاده کردیم تا تصاویر به صورت پویا لود شوند
+        });
+
+        $('div.head-label').html('<h5 class="card-title mb-0">جدول داده با کلید</h5>');
+      }
+    });
+  </script>
+{% endblock page_js %}
+
+{% block content %}
+  <div class="container-fluid h-100 mzloading">
+    <div class="sk-chase sk-primary">
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="tab-content p-0">
+        <div class="row">
+          <div class="col-lg-4 col-md-12">
+            <div class="card">
+              <div class="card-datatable table-responsive pt-0">
+                <table id="my_tasks_table" class="table">
+                  <thead>
+                  <tr>
+                    <th>عنوان</th>
+                    <th>وزن</th>
+                    <th>موعد تحویل</th>
+                  </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="card p-4">
+              <h5 class="card-header">ویرایش اطلاعات نرم‌افزار: {{ app.name }}</h5>
+
+              <form id="appForm" method="POST">
+                {% csrf_token %}
+                <div class="row g-3">
+
+                  <div class="col-md-6">
+                    <label class="form-label" for="name">اسم نرم افزار</label>
+                    <input name="name" class="form-control" id="name" type="text" value="{{ app.name }}" required />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label" for="maker">نام سازنده</label>
+                    <input name="maker" class="form-control" id="maker" type="text"
+                           value="{{ app.maker|default:'' }}" />
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label">پلتفرم</label>
+                    <select name="platform" class="select2 form-select">
+                      <option value="">انتخاب کنید</option>
+                      {% for val, label in platforms %}
+                        <option value="{{ val }}" {% if app.platform == val %}selected{% endif %}>{{ label }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label">کشور سازنده</label>
+                    <select name="country" class="select2 form-select">
+                      <option value="">انتخاب کشور</option>
+                      {% for c in countries %}
+                        <option value="{{ c.id }}" {% if app.country.id == c.id %}selected{% endif %}>
+                          {{ c.name }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label class="form-label">وضعیت رایگان بودن</label>
+                    <select name="normal_user_fee" class="select2 form-select">
+                      <option value="">انتخاب وضعیت</option>
+                      {% for val, label in fees %}
+                        <option value="{{ val }}"
+                                {% if app.normal_user_fee == val %}selected{% endif %}>{{ label }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <div class="d-flex justify-content-end mt-4">
+                  <button class="btn btn-primary me-2" type="submit">
+                    <i class="ti ti-device-floppy me-1"></i>
+                    ذخیره تغییرات
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

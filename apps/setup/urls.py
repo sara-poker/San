@@ -9,6 +9,11 @@ urlpatterns = [
         name="profile",
     ),
     path(
+        "setup/app/<int:pk>",
+        login_required(SetupAppView.as_view(template_name="setup_app.html")),
+        name="setup_app",
+    ),
+    path(
         "setup/users/table",
         login_required(UsersTableView.as_view(template_name="users_table.html")),
         name="usersTable",
