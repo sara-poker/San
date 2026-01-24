@@ -60,8 +60,7 @@ class SetupAppView(TemplateView):
 
             upload_path = os.path.join(
                 settings.BASE_DIR,
-                'src',
-                'assets',
+                'staticfiles',
                 'img',
                 'appsLogo'
             )
@@ -108,8 +107,7 @@ class SetupIspView(TemplateView):
 
             upload_path = os.path.join(
                 settings.BASE_DIR,
-                'src',
-                'assets',
+                'staticfiles',
                 'img',
                 'ispLogo',
                 'RGB'
