@@ -337,7 +337,7 @@
                     <div class="avatar avatar-lg">
                       <img src="/static/img/appsLogo/{{ app.id }}.png"
                            alt="Logo"
-                           onerror="this.src='/static/img/avatars/default.png';"
+                           onerror="this.onerror=null; this.src='{% static 'img/MyFile/logo.jpg' %}';"
                            class="rounded">
                     </div>
                   </div>
