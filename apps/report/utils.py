@@ -5,7 +5,6 @@ from django.db.models import Count, Q
 from apps.test.models import Test, Isp, App
 from apps.report.serializers import *
 
-
 def calculate_report_dashboard_data():
     """محاسبه تمام داده‌های سنگین داشبورد"""
     base_qs = Test.objects.filter(status="Filter")
@@ -115,6 +114,45 @@ def calculate_isp_stats(isp_id):
         'fail_speed_test_percent': fail_percent,
         'apps_count': len(unique_apps),
         'unique_apps': unique_apps,
+        'users_count': len(unique_users),
+        'unique_users': unique_users,
+    }
+
+
+# your_app/utils.py
+
+def calculate_app_stats(app_id):
+    app = get_object_or_404(App, pk=app_id)
+    test_qs = Test.objects.filter(app_id=app_id)
+
+    total_count = test_qs.count()
+    if total_count == 0:
+        return None
+
+    filter_test_count = test_qs.filter(status="Filter").count()
+    without_filter_count = total_count - filter_test_count
+
+    filter_percent = round((filter_test_count * 100) / total_count, 2)
+    without_filter_percent = round((100 - filter_percent), 2)
+
+    # گرفتن لیست یوزرها و ISPها (فقط فیلدهای مورد نیاز)
+    User = get_user_model()
+    unique_users_ids = test_qs.values_list('user', flat=True).distinct()
+    unique_users = list(User.objects.filter(id__in=unique_users_ids).values('id', 'username'))
+
+    unique_isp_ids = test_qs.values_list('isp', flat=True).distinct()
+    unique_isps = list(Isp.objects.filter(id__in=unique_isp_ids).values('id', 'name'))
+
+    return {
+        'app_name': app.name,
+        'app_id': app.id,
+        'test_count': total_count,
+        'success_speed_test': filter_test_count,
+        'fail_speed_test': without_filter_count,
+        'success_speed_test_percent': filter_percent,
+        'fail_speed_test_percent': without_filter_percent,
+        'isp_count': len(unique_isps),
+        'unique_isp': unique_isps,
         'users_count': len(unique_users),
         'unique_users': unique_users,
     }

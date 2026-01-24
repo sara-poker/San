@@ -171,37 +171,23 @@ class AppView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
+        app_id = self.kwargs['pk']
 
-        app = get_object_or_404(App, pk=self.kwargs['pk'])
-        test = Test.objects.filter(app_id=self.kwargs['pk'])
+        cache_key = f"app:stats:{app_id}"
+        cached_data = cache.get(cache_key)
 
-        filter_test_list = test.filter(status="Filter")
-        fliter_test_count = filter_test_list.count()
-        without_fliter_test_count = test.count() - fliter_test_count
+        if not cached_data:
+            cached_data = calculate_app_stats(app_id)
+            if cached_data:
+                cache.set(cache_key, cached_data, timeout=86400)
+            else:
+                raise Http404("دیتایی برای این اپلیکیشن یافت نشد")
 
-        filter_test_percent = round((fliter_test_count * 100) / test.count(), 2)
-        without_fliter_test_percent = round((100 - filter_test_percent), 2)
+        # ۳. تزریق به کانتکس
+        context.update(cached_data)
 
-        unique_users_ids = test.values_list('user', flat=True).distinct()
-        User = get_user_model()
-        unique_users = User.objects.filter(id__in=unique_users_ids)
-
-        unique_isp_ids = test.values_list('isp', flat=True).distinct()
-        unique_isps = Isp.objects.filter(id__in=unique_isp_ids)
-
-        context['app'] = app
-
-        context['test_count'] = test.count()
-        context['success_speed_test'] = fliter_test_count
-        context['fail_speed_test'] = without_fliter_test_count
-        context['success_speed_test_percent'] = filter_test_percent
-        context['fail_speed_test_percent'] = without_fliter_test_percent
-
-        context['isp_count'] = unique_isps.count()
-        context['unique_isp'] = list(unique_isps)
-
-        context['users_count'] = unique_users.count()
-        context['unique_users'] = list(unique_users)
+        # اگر در تمپلیت به خود آبجکت App برای فیلدهای خاص نیاز داری:
+        context['app'] = get_object_or_404(App, pk=app_id)
 
         return context
 
