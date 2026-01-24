@@ -88,7 +88,7 @@ class EndTestSerializer(serializers.ModelSerializer):
     date = serializers.SerializerMethodField()
     app = serializers.CharField(source='app.name')
     isp = serializers.CharField(source='isp.name')
-    name2 = serializers.SerializerMethodField()
+    app_id = serializers.CharField(source='app.id')
 
     class Meta:
         model = Test
@@ -100,9 +100,9 @@ class EndTestSerializer(serializers.ModelSerializer):
             return f"{jalali_date.year:04d}/{jalali_date.month:02d}/{jalali_date.day:02d}"
         return None
 
-    def get_name2(self, obj):
-        name = obj.app.name if obj.app else ""
-        return name.replace(" ", "").lower()
+    def get_app_id(self, obj):
+        name = obj.app.id if obj.app else ""
+        return name
 
 class AddRecordSerializer(serializers.Serializer):
     app = serializers.CharField(max_length=255)

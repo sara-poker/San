@@ -229,7 +229,7 @@
             <img
               alt="User"
               class="rounded-circle"
-              src="${assetsPath}img/appsLogo/${item.name2}.png"
+              src="${assetsPath}img/appsLogo/${item.app_id}.png"
               width="32"
               onerror="this.onerror=null; this.src='${assetsPath}img/MyFile/logo.jpg';"
             />
@@ -275,7 +275,7 @@
             <img
               alt="User"
               class="rounded-circle"
-              src="${assetsPath}img/appsLogo/${item.name2}.png"
+              src="${assetsPath}img/appsLogo/${item.app_id}.png"
               width="32"
               onerror="this.onerror=null; this.src='${assetsPath}img/MyFile/logo.jpg';"
             />
@@ -720,7 +720,7 @@
                     <div>
                       <div class="badge p-2 mb-3 rounded">
                         <img class="item-image-icon"
-                             src="{% static 'img/appsLogo/' %}{{ best_app.name|lower|cut:" " }}.png" alt=""
+                             src="{% static 'img/appsLogo/' %}{{ best_app.id }}.png" alt=""
                              height="100">
                       </div>
                       <h5 class="card-title mb-2 pt-2">
@@ -744,7 +744,7 @@
                     <div>
                       <div class="badge p-2 mb-3 rounded">
                         <img class="item-image-icon"
-                             src="{% static 'img/appsLogo/' %}{{ bad_app.name|lower|cut:" " }}.png" alt="" height="100">
+                             src="{% static 'img/appsLogo/' %}{{ bad_app.id }}.png" alt="" height="100">
                       </div>
                       <h5 class="card-title mb-2 pt-2">
                         <a href="/report/app/{{ bad_app.id }}/">{{ bad_app.name }}</a>
@@ -788,7 +788,7 @@
                   <div class="card-body text-center d-flex flex-column justify-content-between py-4">
                     <div>
                       <div class="badge p-2 mb-3 rounded">
-                        <img class="item-image-icon" src="{% static 'img/ispLogo/RGB/' %}{{ best_isp.as_number }}.png"
+                        <img class="item-image-icon" src="{% static 'img/ispLogo/RGB/' %}{{ best_isp.id }}.png"
                              alt="" height="100">
                       </div>
                       <h5 class="card-title mb-2 pt-2">
@@ -811,7 +811,7 @@
                   <div class="card-body text-center d-flex flex-column justify-content-between py-4">
                     <div>
                       <div class="badge p-2 mb-3 rounded">
-                        <img class="item-image-icon" src="{% static 'img/ispLogo/RGB/' %}{{ bad_isp.as_number }}.png"
+                        <img class="item-image-icon" src="{% static 'img/ispLogo/RGB/' %}{{ bad_isp.id }}.png"
                              alt="" height="100">
                       </div>
                       <h5 class="card-title mb-2 pt-2">
