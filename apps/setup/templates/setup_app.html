@@ -307,7 +307,7 @@
                       <option value="">انتخاب کشور</option>
                       {% for c in countries %}
                         <option value="{{ c.id }}" {% if app.country.id == c.id %}selected{% endif %}>
-                          {{ c.name }}
+                          {{ c.persian_name }}
                         </option>
                       {% endfor %}
                     </select>

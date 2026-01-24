@@ -300,7 +300,7 @@
                       <option value="">انتخاب کشور</option>
                       {% for c in countries %}
                         <option value="{{ c.id }}"
-                                {% if isp.country.id == c.id %}selected{% endif %}>{{ c.name }}</option>
+                                {% if isp.country.id == c.id %}selected{% endif %}>{{ c.persian_name }}</option>
                       {% endfor %}
                     </select>
                   </div>
