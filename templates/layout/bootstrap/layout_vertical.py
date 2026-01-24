@@ -1,12 +1,7 @@
 from django.conf import settings
-from django.core.cache import cache
-from django.db.models import Exists, OuterRef
+import copy
 
-from apps.test.models import Test, Isp
-from apps.report.serializers import PROVINCES_FA
-
-import json
-import requests
+from ..bootstrap.menu_dict import menu_user, menu_manager, menu_admin
 
 from web_project.template_helpers.theme import TemplateHelper
 
@@ -118,7 +113,22 @@ class TemplateBootstrapLayoutVertical:
 
     def init_menu_data(context):
         # Load the menu data from the JSON
-        menu_data = menu_file
+        view = context.get('view')
+        request = getattr(view, 'request', None)
+
+        user = request.user if request else None
+
+        if user and user.is_authenticated:
+            if user.role == "manager":
+                selected_menu = menu_manager
+            elif user.role == "admin":
+                selected_menu = menu_admin
+            else:
+                selected_menu = menu_user
+        else:
+            selected_menu = menu_user
+
+        menu_data = copy.deepcopy(selected_menu)
 
         # Updated context with menu_data
         context.update({"menu_data": menu_data})
