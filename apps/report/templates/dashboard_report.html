@@ -721,7 +721,9 @@
                       <div class="badge p-2 mb-3 rounded">
                         <img class="item-image-icon"
                              src="{% static 'img/appsLogo/' %}{{ best_app.id }}.png" alt=""
-                             height="100">
+                             height="100"
+                             onerror="this.onerror=null; this.src='{% static 'img/MyFile/logo.png' %}';"
+                        >
                       </div>
                       <h5 class="card-title mb-2 pt-2">
                         <a href="/report/app/{{ best_app.id }}/">{{ best_app.name }}</a>
@@ -744,7 +746,8 @@
                     <div>
                       <div class="badge p-2 mb-3 rounded">
                         <img class="item-image-icon"
-                             src="{% static 'img/appsLogo/' %}{{ bad_app.id }}.png" alt="" height="100">
+                             src="{% static 'img/appsLogo/' %}{{ bad_app.id }}.png" alt="" height="100"
+                             onerror="this.onerror=null; this.src='{% static 'img/MyFile/logo.png' %}';">
                       </div>
                       <h5 class="card-title mb-2 pt-2">
                         <a href="/report/app/{{ bad_app.id }}/">{{ bad_app.name }}</a>
@@ -789,7 +792,8 @@
                     <div>
                       <div class="badge p-2 mb-3 rounded">
                         <img class="item-image-icon" src="{% static 'img/ispLogo/RGB/' %}{{ best_isp.id }}.png"
-                             alt="" height="100">
+                             alt="" height="100"
+                             onerror="this.onerror=null; this.src='{% static 'img/MyFile/logo.png' %}';">
                       </div>
                       <h5 class="card-title mb-2 pt-2">
                         <a href="/report/isp/{{ best_isp.id }}/">{{ best_isp.name }}</a>
@@ -812,7 +816,8 @@
                     <div>
                       <div class="badge p-2 mb-3 rounded">
                         <img class="item-image-icon" src="{% static 'img/ispLogo/RGB/' %}{{ bad_isp.id }}.png"
-                             alt="" height="100">
+                             alt="" height="100"
+                             onerror="this.onerror=null; this.src='{% static 'img/MyFile/logo.png' %}';">
                       </div>
                       <h5 class="card-title mb-2 pt-2">
                         <a href="/report/isp/{{ bad_isp.id }}/">{{ bad_isp.name }}</a>
