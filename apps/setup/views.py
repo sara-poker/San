@@ -54,6 +54,28 @@ class SetupAppView(TemplateView):
         app.normal_user_fee = request.POST.get('normal_user_fee')
 
         app.save()
+
+        if 'logo' in request.FILES:
+            logo_file = request.FILES['logo']
+
+            upload_path = os.path.join(
+                settings.BASE_DIR,
+                'src',
+                'assets',
+                'img',
+                'appsLogo'
+            )
+
+            if not os.path.exists(upload_path):
+                os.makedirs(upload_path)
+
+            file_name = f"{app.id}.png"
+            full_path = os.path.join(upload_path, file_name)
+
+            with open(full_path, 'wb+') as destination:
+                for chunk in logo_file.chunks():
+                    destination.write(chunk)
+
         return redirect(request.path)
 
 

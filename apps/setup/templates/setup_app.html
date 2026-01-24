@@ -143,8 +143,8 @@
       // DataTable with buttons
       if (dt_basic_table.length) {
         var reportType = '{{ report_type }}';
-        url1 = '/api/get_all_isp_server_test/';
-        url2 = '/report/isp_server_test/';
+        var url1 = '/api/get_all_app/';
+        var url2 = '/setup/app/';
 
         var dt_basic = dt_basic_table.DataTable({
           ajax: {
@@ -168,7 +168,7 @@
                 if (id) {
                   return (
                     '<a href="' + url2 + id + '">' +
-                    '<img src="' + assetsPath + 'img/appsLogo/' + name.toLowerCase() + '.png' + '" ' +
+                    '<img src="' + assetsPath + 'img/appsLogo/' + id + '.png' + '" ' +
                     'alt="Avatar" width="60" class="rounded-circle" ' +
                     'loading="lazy" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/MyFile/logo.jpg\';">' +
                     '</a>'
@@ -276,7 +276,7 @@
             <div class="card p-4">
               <h5 class="card-header">ویرایش اطلاعات نرم‌افزار: {{ app.name }}</h5>
 
-              <form id="appForm" method="POST">
+              <form id="appForm" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row g-3">
 
@@ -327,6 +327,22 @@
                 </div>
 
                 <hr class="my-4">
+
+                <div class="col-md-12">
+                  <label class="form-label" for="logo">آپلود لوگو (فرمت PNG با نام {{ app.id }}.png ذخیره
+                    می‌شود)</label>
+                  <div class="d-flex align-items-center gap-3">
+                    <input name="logo" class="form-control" id="logo" type="file" accept="image/png, image/jpeg" />
+
+                    <div class="avatar avatar-lg">
+                      <img src="/static/img/appsLogo/{{ app.id }}.png"
+                           alt="Logo"
+                           onerror="this.src='/static/img/avatars/default.png';"
+                           class="rounded">
+                    </div>
+                  </div>
+                  <small class="text-muted">با آپلود عکس جدید، عکس قبلی جایگزین می‌شود.</small>
+                </div>
 
                 <div class="d-flex justify-content-end mt-4">
                   <button class="btn btn-primary me-2" type="submit">
