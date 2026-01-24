@@ -168,7 +168,7 @@
                 if (id) {
                   return (
                     '<a href="' + url2 + id + '">' +
-                    '<img src="' + assetsPath + 'img/ispLogo/RGB/' + asnumber + '.png' + '" ' +
+                    '<img src="' + assetsPath + 'img/ispLogo/RGB/' + id + '.png' + '" ' +
                     'alt="Avatar" width="60" class="rounded-circle" ' +
                     'loading="lazy" onerror="this.onerror=null; this.src=\'' + assetsPath + 'img/MyFile/logo.jpg\';">' +
                     '</a>'
@@ -274,28 +274,24 @@
 
           <div class="col-lg-8">
             <div class="card p-4">
-              <h5 class="card-header">ویرایش اطلاعات اپراتور: {{ isp.name }}</h5>
+              <h5 class="card-header">ویرایش اطلاعات و لوگوی اپراتور</h5>
 
-              <form id="ispForm" method="POST">
+              <form id="ispForm" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row g-3">
 
                   <div class="col-md-6">
-                    <label class="form-label" for="name">نام اپراتور</label>
-                    <input name="name" class="form-control" id="name" type="text"
-                           value="{{ isp.name }}" required />
+                    <label class="form-label">نام اپراتور</label>
+                    <input name="name" class="form-control" type="text" value="{{ isp.name }}" required />
                   </div>
-
                   <div class="col-md-6">
-                    <label class="form-label" for="org">سازمان</label>
-                    <input name="org" class="form-control" id="org" type="text"
-                           value="{{ isp.org|default:'' }}" />
+                    <label class="form-label">سازمان</label>
+                    <input name="org" class="form-control" type="text" value="{{ isp.org|default:'' }}" />
                   </div>
 
                   <div class="col-md-12">
-                    <label class="form-label" for="url">آدرس وب‌سایت</label>
-                    <input name="url" class="form-control" id="url" type="text"
-                           value="{{ isp.url|default:'' }}" placeholder="https://example.com" />
+                    <label class="form-label">آدرس وب‌سایت</label>
+                    <input name="url" class="form-control" type="text" value="{{ isp.url|default:'' }}" />
                   </div>
 
                   <div class="col-md-4">
@@ -303,34 +299,42 @@
                     <select name="country" class="select2 form-select">
                       <option value="">انتخاب کشور</option>
                       {% for c in countries %}
-                        <option value="{{ c.id }}" {% if isp.country.id == c.id %}selected{% endif %}>
-                          {{ c.name }}
-                        </option>
+                        <option value="{{ c.id }}"
+                                {% if isp.country.id == c.id %}selected{% endif %}>{{ c.name }}</option>
                       {% endfor %}
                     </select>
                   </div>
-
                   <div class="col-md-4">
-                    <label class="form-label" for="as_number">AS Number</label>
-                    <input name="as_number" class="form-control" id="as_number" type="text"
-                           value="{{ isp.as_number|default:'' }}" />
+                    <label class="form-label">AS Number</label>
+                    <input name="as_number" class="form-control" type="text" value="{{ isp.as_number|default:'' }}" />
                   </div>
-
                   <div class="col-md-4">
-                    <label class="form-label" for="asname">AS Name</label>
-                    <input name="asname" class="form-control" id="asname" type="text"
-                           value="{{ isp.asname|default:'' }}" />
+                    <label class="form-label">AS Name</label>
+                    <input name="asname" class="form-control" type="text" value="{{ isp.asname|default:'' }}" />
                   </div>
 
                 </div>
 
                 <hr class="my-4">
 
+                <div class="col-md-12">
+                  <label class="form-label" for="logo">آپلود لوگو (فرمت PNG با نام {{ isp.id }}.png ذخیره
+                    می‌شود)</label>
+                  <div class="d-flex align-items-center gap-3">
+                    <input name="logo" class="form-control" id="logo" type="file" accept="image/png, image/jpeg" />
+
+                    <div class="avatar avatar-lg">
+                      <img src="/static/img/ispLogo/RGB/{{ isp.id }}.png"
+                           alt="Logo"
+                           onerror="this.src='/static/img/avatars/default.png';"
+                           class="rounded">
+                    </div>
+                  </div>
+                  <small class="text-muted">با آپلود عکس جدید، عکس قبلی جایگزین می‌شود.</small>
+                </div>
+
                 <div class="d-flex justify-content-end mt-4">
-                  <button class="btn btn-primary me-2" type="submit">
-                    <i class="ti ti-device-floppy me-1"></i>
-                    ذخیره اطلاعات اپراتور
-                  </button>
+                  <button class="btn btn-primary me-2" type="submit">ذخیره اطلاعات و تصویر</button>
                 </div>
               </form>
             </div>

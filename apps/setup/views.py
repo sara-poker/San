@@ -1,3 +1,6 @@
+import os
+
+from django.conf import settings
 from django.views.generic import (TemplateView)
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect, get_object_or_404
@@ -14,11 +17,9 @@ class ProfileView(TemplateView):
 
         test_qs = Test.objects.filter(user=self.request.user)
 
-        # تعداد موفق و ناموفق
         success_count = test_qs.filter(status="Without Filter").count()
         fail_count = test_qs.filter(status="Filter").count()
 
-        # اضافه به context
         context['success_count'] = success_count
         context['fail_count'] = fail_count
         context['device_info_list'] = []
@@ -59,9 +60,7 @@ class SetupAppView(TemplateView):
 class SetupIspView(TemplateView):
     def get_context_data(self, **kwargs):
         context = TemplateLayout.init(self, super().get_context_data(**kwargs))
-        # دریافت اطلاعات اپراتور (ISP)
         isp_instance = get_object_or_404(Isp, id=self.kwargs['pk'])
-
         context['isp'] = isp_instance
         context['countries'] = Country.objects.all()
         return context
@@ -69,7 +68,7 @@ class SetupIspView(TemplateView):
     def post(self, request, *args, **kwargs):
         isp_instance = get_object_or_404(Isp, id=self.kwargs['pk'])
 
-        # استخراج داده‌ها از فرم ارسال شده
+        # ۱. ذخیره اطلاعات متنی
         isp_instance.name = request.POST.get('name')
         isp_instance.url = request.POST.get('url')
         isp_instance.org = request.POST.get('org')
@@ -82,7 +81,28 @@ class SetupIspView(TemplateView):
 
         isp_instance.save()
 
-        # ریدایرکت به همان صفحه برای مشاهده تغییرات
+        if 'logo' in request.FILES:
+            logo_file = request.FILES['logo']
+
+            upload_path = os.path.join(
+                settings.BASE_DIR,
+                'src',
+                'assets',
+                'img',
+                'ispLogo',
+                'RGB'
+            )
+
+            if not os.path.exists(upload_path):
+                os.makedirs(upload_path)
+
+            file_name = f"{isp_instance.id}.png"
+            full_path = os.path.join(upload_path, file_name)
+
+            with open(full_path, 'wb+') as destination:
+                for chunk in logo_file.chunks():
+                    destination.write(chunk)
+
         return redirect(request.path)
 
 
